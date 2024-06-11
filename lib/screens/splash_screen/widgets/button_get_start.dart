@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:littletherapist/screens/auth_screen/register_screen/register_screen.dart';
+import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
 class GetStartButton extends StatelessWidget {
   const GetStartButton({
@@ -27,7 +29,9 @@ class GetStartButton extends StatelessWidget {
               backgroundColor: const WidgetStatePropertyAll(Colors.red),
               minimumSize: WidgetStatePropertyAll(
                   Size(size.width * 0.7, size.height * 0.06))),
-          onPressed: () {},
+          onPressed: () {
+            CustomNavigation.nextPage(context, const RegisterScreen());
+          },
           child: const Text(
             "GET START",
             style: TextStyle(
