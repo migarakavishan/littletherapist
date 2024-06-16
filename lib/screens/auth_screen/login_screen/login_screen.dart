@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:littletherapist/screens/auth_screen/register_screen/register_screen.dart';
+import 'package:littletherapist/screens/home_page/home_page.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -79,7 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const WidgetStatePropertyAll(Colors.blue),
                             minimumSize: WidgetStatePropertyAll(
                                 Size(size.width * 1, 50))),
-                        onPressed: () {},
+                        onPressed: () {
+                          CustomNavigation.nextPage(context, const HomePage());
+                        },
                         child: const Text(
                           "Login",
                           style: TextStyle(
