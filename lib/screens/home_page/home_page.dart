@@ -23,10 +23,42 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HomeHeader(size: size),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Hello,",
+                        style: TextStyle(color: Colors.black, fontSize: 25),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "Peter",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Let's start playing!",
+                    style: TextStyle(color: Colors.grey.shade700, fontSize: 15),
+                  ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
