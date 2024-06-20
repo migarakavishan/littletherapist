@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     children: [
                       Text(
-                        "Hello,",
+                        "Hello hello,",
                         style: TextStyle(color: Colors.black, fontSize: 25),
                       ),
                       SizedBox(
