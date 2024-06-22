@@ -18,6 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<GameModel> gamestitle = DemoData.gamestitle;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
