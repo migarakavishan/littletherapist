@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
+import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
@@ -46,11 +48,9 @@ class MenuDrawer extends StatelessWidget {
                   children: [
                     RichText(
                         text: TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {},
+                            recognizer: TapGestureRecognizer()..onTap = () {},
                             text: "Edit Profile",
-                            style:
-                                TextStyle(color: Colors.grey.shade400))),
+                            style: TextStyle(color: Colors.grey.shade400))),
                     Icon(
                       Icons.arrow_forward_ios,
                       color: Colors.grey.shade400,
@@ -91,7 +91,9 @@ class MenuDrawer extends StatelessWidget {
               "Logout",
               style: TextStyle(color: Colors.red),
             ),
-            onTap: () {})
+            onTap: () {
+              CustomNavigation.nextPage(context, const LoginScreen());
+            })
       ],
     );
   }
