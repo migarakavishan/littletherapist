@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:littletherapist/screens/splash_screen/splash_screen.dart';
 
 void main() {
+  // debugPaintSizeEnabled = true;
   runApp(const MyApp());
 }
 
@@ -22,5 +23,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
