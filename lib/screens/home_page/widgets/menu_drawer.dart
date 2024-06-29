@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
+import 'package:littletherapist/screens/edit_profile/edit_profile.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -48,7 +49,11 @@ class MenuDrawer extends StatelessWidget {
                   children: [
                     RichText(
                         text: TextSpan(
-                            recognizer: TapGestureRecognizer()..onTap = () {},
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                CustomNavigation.nextPage(
+                                    context, const EditProfile());
+                              },
                             text: "Edit Profile",
                             style: TextStyle(color: Colors.grey.shade400))),
                     Icon(
