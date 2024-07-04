@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:littletherapist/screens/auth_screen/forgot_password/forgot_password.dart';
 import 'package:littletherapist/screens/auth_screen/register_screen/register_screen.dart';
 import 'package:littletherapist/screens/home_page/home_page.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
@@ -62,7 +63,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     RichText(
                             text: TextSpan(
-                      recognizer: TapGestureRecognizer()..onTap = () {},
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          CustomNavigation.nextPage(
+                              context, const ForgotPassword());
+                        },
                       text: "Forgot Password?",
                       style: const TextStyle(color: Colors.blue, fontSize: 15),
                     ))
