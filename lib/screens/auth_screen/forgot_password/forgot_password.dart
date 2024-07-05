@@ -36,7 +36,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 height: 10,
               ),
               const Text(
-                "Insert your email and get password reset email",
+                "Insert your email and get password reset email to rest password",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 15,
