@@ -1,4 +1,4 @@
-package com.example.littletherapist
+package lk.migara.littletherapist
 
 import io.flutter.embedding.android.FlutterActivity
 
