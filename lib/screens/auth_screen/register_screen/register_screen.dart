@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:littletherapist/controllers/auth_controller.dart';
 import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
+import 'package:logger/logger.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -12,6 +14,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
@@ -54,6 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: size.height * 0.02,
                   ),
                   TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                         hintText: "Email",
                         border: OutlineInputBorder(
@@ -66,6 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: size.height * 0.02,
                   ),
                   TextField(
+                    controller: passwordController,
                     obscureText: isObscure,
                     decoration: InputDecoration(
                         hintText: "Password",
@@ -79,6 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: size.height * 0.02,
                   ),
                   TextField(
+                    controller: confirmPasswordController,
                     obscureText: isObscure,
                     decoration: InputDecoration(
                         hintText: "Confirm Password",
@@ -97,7 +106,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   const WidgetStatePropertyAll(Colors.blue),
                               minimumSize: WidgetStatePropertyAll(
                                   Size(size.width * 1, 50))),
-                          onPressed: () {},
+                          onPressed: () {
+                            if (emailController.text.trim().isEmpty ||
+                                passwordController.text.trim().isEmpty ||
+                                passwordController.text !=
+                                    confirmPasswordController.text) {
+                              Logger().e("Invalid data");
+                            } else {
+                              AuthController().createAccount(
+                                  email: emailController.text,
+                                  password: passwordController.text);
+                            }
+                          },
                           child: const Text(
                             "Sign Up",
                             style: TextStyle(

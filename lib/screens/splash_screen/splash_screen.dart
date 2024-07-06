@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
+import 'package:littletherapist/screens/home_page/home_page.dart';
 import 'package:littletherapist/screens/splash_screen/widgets/button_get_start.dart';
 import 'package:littletherapist/screens/splash_screen/widgets/button_have_account.dart';
+import 'package:littletherapist/utils/navigation/custom_navigation.dart';
+import 'package:logger/logger.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,6 +16,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user == null) {
+          Logger().e('User is currently signed out!');
+          CustomNavigation.nextPage(context, const LoginScreen());
+        } else {
+          Logger().e('User is signed in!');
+          CustomNavigation.nextPage(context, const HomePage());
+        }
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
