@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "310385285063",
+    "project_id": "littletherapist-2ef74",
+    "storage_bucket": "littletherapist-2ef74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310385285063:android:f3812509938acc6e172be2",
+        "android_client_info": {
+          "package_name": "lk.migara.littletherapist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZkZSGuxtaub6cFUeO2BvJx-4KPp15vpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
