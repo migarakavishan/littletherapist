@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
+import 'package:littletherapist/controllers/auth_controller.dart';
 import 'package:littletherapist/screens/edit_profile/edit_profile.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
@@ -97,7 +97,7 @@ class MenuDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.red),
             ),
             onTap: () {
-              CustomNavigation.nextPage(context, const LoginScreen());
+              AuthController().signOutUser();
             })
       ],
     );

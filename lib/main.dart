@@ -1,15 +1,24 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:littletherapist/firebase_options.dart';
+import 'package:littletherapist/providers/signin_provider.dart';
+import 'package:littletherapist/providers/signup_provider.dart';
 import 'package:littletherapist/screens/splash_screen/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // debugPaintSizeEnabled = true;
-  runApp(const MyApp());
+
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => SignupProvider()),
+      ChangeNotifierProvider(create: (context) => SigninProvider()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
