@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
 import 'package:littletherapist/screens/home_page/home_page.dart';
-import 'package:littletherapist/screens/splash_screen/widgets/button_get_start.dart';
-import 'package:littletherapist/screens/splash_screen/widgets/button_have_account.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:logger/logger.dart';
 
@@ -99,18 +98,10 @@ class _SplashScreenState extends State<SplashScreen> {
             ).animate().fade(duration: 1200.ms).slideY(curve: Curves.easeIn)),
         Positioned(
             top: size.height * 0.72,
-            left: 60,
-            child: GetStartButton(size: size)
-                .animate()
-                .fade(duration: 1000.ms)
-                .slideY(begin: 4, end: 1)),
-        Positioned(
-            top: size.height * 0.8,
-            left: 60,
-            child: HaveAccountButton(size: size)
-                .animate()
-                .fade(duration: 1000.ms)
-                .slideY(begin: 4, end: 1))
+            left: 190,
+            child: const CupertinoActivityIndicator(
+              color: Colors.black,
+            )),
       ],
     ));
   }
