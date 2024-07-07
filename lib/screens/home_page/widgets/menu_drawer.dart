@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:littletherapist/controllers/auth_controller.dart';
+import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
 import 'package:littletherapist/screens/edit_profile/edit_profile.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
+import 'package:provider/provider.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
@@ -34,9 +36,9 @@ class MenuDrawer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 20),
                 ),
-                const Text(
-                  "peterandersan@mail.com",
-                  style: TextStyle(
+                Text(
+                  "${Provider.of<auth_provider.AuthProvider>(context).user!.email}",
+                  style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 15),

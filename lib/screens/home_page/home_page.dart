@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:littletherapist/models/game_model.dart';
+import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
 import 'package:littletherapist/screens/home_page/widgets/games_grid.dart';
 import 'package:littletherapist/utils/demo_data.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/home_header.dart';
 import 'widgets/menu_drawer.dart';
@@ -38,18 +40,18 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Row(
+                Row(
                   children: [
-                    Text(
+                    const Text(
                       "Hello,",
                       style: TextStyle(color: Colors.black, fontSize: 25),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Text(
-                      "Peter",
-                      style: TextStyle(
+                      "${Provider.of<auth_provider.AuthProvider>(context).user!.email}",
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 25,
                           fontWeight: FontWeight.bold),
