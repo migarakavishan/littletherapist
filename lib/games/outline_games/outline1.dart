@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:littletherapist/games/outline_games/outline2.dart';
+import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
 class Outline1 extends StatefulWidget {
   const Outline1({super.key});
@@ -85,8 +87,13 @@ class _Outline1State extends State<Outline1> {
                   ],
                 ),
               ),
-              const CircleAvatar(
-                child: Icon(Icons.arrow_right_alt_rounded),
+              GestureDetector(
+                onTap: () {
+                  CustomNavigation.nextPage(context, const Outline2());
+                },
+                child: const CircleAvatar(
+                  child: Icon(Icons.arrow_right_alt_rounded),
+                ),
               )
             ],
           ),
