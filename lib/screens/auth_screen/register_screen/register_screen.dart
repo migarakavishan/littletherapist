@@ -45,6 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       height: size.height * 0.02,
                     ),
                     TextField(
+                      controller: value.nameController,
                       decoration: InputDecoration(
                           hintText: "Username",
                           border: OutlineInputBorder(

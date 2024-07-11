@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:littletherapist/models/user_model.dart';
 import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
 import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
 import 'package:littletherapist/screens/home_page/home_page.dart';
@@ -8,6 +10,7 @@ import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class AuthController {
+  CollectionReference users = FirebaseFirestore.instance.collection("Users");
   Future<void> listenAuthState(BuildContext context) async {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
@@ -17,18 +20,39 @@ class AuthController {
         Provider.of<auth_provider.AuthProvider>(context, listen: false)
             .setUser(user);
         Logger().e('User is signed in!');
-        CustomNavigation.nextPage(context, const HomePage());
+        fetchUserData(user.uid).then((value) {
+          if (value != null) {
+            Provider.of<auth_provider.AuthProvider>(context, listen: false)
+                .setUserModel(value);
+            CustomNavigation.nextPage(context, const HomePage());
+          } else {
+            Provider.of<auth_provider.AuthProvider>(context, listen: false)
+                .setUserModel(UserModel(name: "", image: "https://i.sstatic.net/l60Hf.png", email: user.uid, uid: user.uid));
+            CustomNavigation.nextPage(context, const HomePage());
+          }
+        });
       }
     });
   }
 
   Future<bool> createAccount(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String name}) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      if (credential.user != null) {
+        UserModel model = UserModel(
+            name: name,
+            image: "https://i.sstatic.net/l60Hf.png",
+            email: email,
+            uid: credential.user!.uid);
+        addUserData(model);
+      }
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -65,5 +89,24 @@ class AuthController {
 
   Future<void> sendpasswordResetEmail(String email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
+
+  Future<void> addUserData(UserModel user) async {
+    try {
+      await users.doc(user.uid).set(user.toJson());
+      Logger().f("user Data Added");
+    } catch (e) {
+      Logger().e(e);
+    }
+  }
+
+  Future<UserModel?> fetchUserData(String uid) async {
+    try {
+      DocumentSnapshot snapshot = await users.doc(uid).get();
+      return UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
+    } catch (e) {
+      Logger().e(e);
+      return null;
+    }
   }
 }

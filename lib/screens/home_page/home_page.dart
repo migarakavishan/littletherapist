@@ -50,7 +50,9 @@ class _HomePageState extends State<HomePage> {
                       width: 5,
                     ),
                     Text(
-                      "${Provider.of<auth_provider.AuthProvider>(context).user!.email}",
+                      Provider.of<auth_provider.AuthProvider>(context)
+                          .userModel!
+                          .name,
                       style: const TextStyle(
                           color: Colors.black,
                           fontSize: 25,

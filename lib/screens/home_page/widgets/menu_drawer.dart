@@ -29,9 +29,11 @@ class MenuDrawer extends StatelessWidget {
                   backgroundImage: NetworkImage(
                       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWomPds9w5emH_C6RY8xF7KRCJe6I5zwVsuw&s'),
                 ),
-                const Text(
-                  "Peter Andesan",
-                  style: TextStyle(
+                Text(
+                  Provider.of<auth_provider.AuthProvider>(context)
+                      .userModel!
+                      .name,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20),
