@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
+import 'package:provider/provider.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key, required this.size});
@@ -16,10 +18,11 @@ class HomeHeader extends StatelessWidget {
               },
               icon: const Icon(Icons.menu));
         }),
-        const CircleAvatar(
+        CircleAvatar(
           radius: 20,
           backgroundImage: NetworkImage(
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWomPds9w5emH_C6RY8xF7KRCJe6I5zwVsuw&s"),
+            Provider.of<auth_provider.AuthProvider>(context).userModel!.image,
+          ),
         )
       ],
     );
