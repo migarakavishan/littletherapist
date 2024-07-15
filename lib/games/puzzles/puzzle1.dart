@@ -13,7 +13,7 @@ class Puzzle1 extends StatefulWidget {
 class _Puzzle1State extends State<Puzzle1> {
   List<DatamodelPuzzle1> dataModel = [];
   List<DatamodelPuzzle1> dataModel2 = [];
-  int rows = 3, columns = 3;
+  int rows = 2, columns = 2;
 
   void _incrementCounter() {
     for (var i = 1; i <= rows * columns; i++) {
@@ -90,7 +90,7 @@ class _Puzzle1State extends State<Puzzle1> {
                               : Image.asset(
                                   dataModel[index].dataModel!.imagePath,
                                   fit: BoxFit.cover,
-                                  width: 140,
+                                  width: 200,
                                 ),
                         ),
                       );
