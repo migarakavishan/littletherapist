@@ -69,6 +69,8 @@ flutter:
   assets:
     - assets/images/
     - assets/images/puzzle1/
+    - assets/images/puzzle2/
+    - assets/images/puzzle3/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:littletherapist/models/datamodel_puzzle.dart';
-import 'package:littletherapist/games/puzzles/puzzle3.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
-class Puzzle2 extends StatefulWidget {
-  const Puzzle2({super.key});
+class Puzzle3 extends StatefulWidget {
+  const Puzzle3({super.key});
 
   @override
-  State<Puzzle2> createState() => _Puzzle2State();
+  State<Puzzle3> createState() => _Puzzle3State();
 }
 
-class _Puzzle2State extends State<Puzzle2> {
+class _Puzzle3State extends State<Puzzle3> {
   List<DatamodelPuzzle> dataModel = [];
   List<DatamodelPuzzle> dataModel2 = [];
   int rows = 3, columns = 3;
@@ -20,7 +19,7 @@ class _Puzzle2State extends State<Puzzle2> {
       dataModel.add(DatamodelPuzzle(
         text: 'Image',
         number: i,
-        imagePath: 'assets/images/puzzle2/image_$i.png', // Add image path
+        imagePath: 'assets/images/puzzle3/image_$i.png', // Add image path
       ));
     }
   }
@@ -59,7 +58,7 @@ class _Puzzle2State extends State<Puzzle2> {
               height: 100,
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/images/giraf.png"))),
+                      image: AssetImage("assets/images/monkey.jpg"))),
             ),
             const SizedBox(
               height: 10,

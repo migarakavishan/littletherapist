@@ -1,10 +1,10 @@
-class DatamodelPuzzle1 {
+class DatamodelPuzzle {
   String text;
   int number;
-  DatamodelPuzzle1? dataModel;
+  DatamodelPuzzle? dataModel;
   String imagePath;
 
-  DatamodelPuzzle1({
+  DatamodelPuzzle({
     required this.text,
     required this.number,
     this.dataModel,

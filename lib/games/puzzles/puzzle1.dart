@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:littletherapist/games/puzzles/models/datamodel_puzzle1.dart';
+import 'package:littletherapist/models/datamodel_puzzle.dart';
 import 'package:littletherapist/games/puzzles/puzzle2.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
@@ -11,13 +11,13 @@ class Puzzle1 extends StatefulWidget {
 }
 
 class _Puzzle1State extends State<Puzzle1> {
-  List<DatamodelPuzzle1> dataModel = [];
-  List<DatamodelPuzzle1> dataModel2 = [];
-  int rows = 3, columns = 3;
+  List<DatamodelPuzzle> dataModel = [];
+  List<DatamodelPuzzle> dataModel2 = [];
+  int rows = 2, columns = 2;
 
   void _incrementCounter() {
     for (var i = 1; i <= rows * columns; i++) {
-      dataModel.add(DatamodelPuzzle1(
+      dataModel.add(DatamodelPuzzle(
         text: 'Image',
         number: i,
         imagePath: 'assets/images/puzzle1/image_$i.jpg', // Add image path
@@ -30,7 +30,7 @@ class _Puzzle1State extends State<Puzzle1> {
     super.initState();
     _incrementCounter();
     for (var model in dataModel) {
-      dataModel2.add(DatamodelPuzzle1(
+      dataModel2.add(DatamodelPuzzle(
         text: model.text,
         number: model.number,
         imagePath: model.imagePath,
@@ -75,7 +75,7 @@ class _Puzzle1State extends State<Puzzle1> {
               ),
               itemBuilder: (context, index) {
                 return Center(
-                  child: DragTarget<DatamodelPuzzle1>(
+                  child: DragTarget<DatamodelPuzzle>(
                     builder: (BuildContext context, List<Object?> candidateData,
                         List<dynamic> rejectedData) {
                       return Container(
@@ -90,7 +90,7 @@ class _Puzzle1State extends State<Puzzle1> {
                               : Image.asset(
                                   dataModel[index].dataModel!.imagePath,
                                   fit: BoxFit.cover,
-                                  width: 140,
+                                  width: 200,
                                 ),
                         ),
                       );
@@ -122,7 +122,7 @@ class _Puzzle1State extends State<Puzzle1> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: LongPressDraggable<DatamodelPuzzle1>(
+                    child: LongPressDraggable<DatamodelPuzzle>(
                       data: dataModel2[index],
                       feedback: Material(
                         child: Image.asset(
