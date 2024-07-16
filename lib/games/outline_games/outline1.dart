@@ -89,7 +89,7 @@ class _Outline1State extends State<Outline1> {
               ),
               GestureDetector(
                 onTap: () {
-                  CustomNavigation.nextPage(context, const Outline2());
+                  CustomNavigation2.nextPage2(context, const Outline2());
                 },
                 child: const CircleAvatar(
                   child: Icon(Icons.arrow_right_alt_rounded),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:littletherapist/games/puzzles/puzzle4.dart';
 import 'package:littletherapist/models/datamodel_puzzle.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
@@ -45,7 +46,7 @@ class _Puzzle3State extends State<Puzzle3> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: const Color(0xFF4CA5C1),
         title: const Text(
-          "title",
+          "Complete the Puzzle",
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),
@@ -148,7 +149,7 @@ class _Puzzle3State extends State<Puzzle3> {
             ),
             GestureDetector(
               onTap: () {
-                CustomNavigation.nextPage(context, const Puzzle3());
+                CustomNavigation2.nextPage2(context, const Puzzle4());
               },
               child: const CircleAvatar(
                 child: Icon(Icons.arrow_right_alt_rounded),

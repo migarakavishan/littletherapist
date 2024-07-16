@@ -42,6 +42,8 @@ dependencies:
   firebase_auth: ^5.1.1
   provider: ^6.1.2
   cloud_firestore: ^5.1.0
+  image_picker: ^1.1.2
+  image_cropper: ^7.1.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,8 @@ flutter:
     - assets/images/puzzle1/
     - assets/images/puzzle2/
     - assets/images/puzzle3/
+    - assets/images/puzzle4/
+    - assets/images/puzzle5/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
