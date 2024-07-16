@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:littletherapist/models/datamodel_puzzle.dart';
 import 'package:littletherapist/games/puzzles/puzzle2.dart';
+import 'package:littletherapist/models/datamodel_puzzle.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
 class Puzzle1 extends StatefulWidget {
@@ -46,7 +46,7 @@ class _Puzzle1State extends State<Puzzle1> {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: const Color(0xFF4CA5C1),
         title: const Text(
-          "title",
+          "Complete the Puzzle",
           style: TextStyle(
               fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),
@@ -149,7 +149,7 @@ class _Puzzle1State extends State<Puzzle1> {
             ),
             GestureDetector(
               onTap: () {
-                CustomNavigation.nextPage(context, const Puzzle2());
+                CustomNavigation2.nextPage2(context, const Puzzle2());
               },
               child: const CircleAvatar(
                 child: Icon(Icons.arrow_right_alt_rounded),

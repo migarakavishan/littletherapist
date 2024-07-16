@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:littletherapist/models/datamodel_puzzle.dart';
-import 'package:littletherapist/games/puzzles/puzzle3.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
-class Puzzle2 extends StatefulWidget {
-  const Puzzle2({super.key});
+class Puzzle5 extends StatefulWidget {
+  const Puzzle5({super.key});
 
   @override
-  State<Puzzle2> createState() => _Puzzle2State();
+  State<Puzzle5> createState() => _Puzzle5State();
 }
 
-class _Puzzle2State extends State<Puzzle2> {
+class _Puzzle5State extends State<Puzzle5> {
   List<DatamodelPuzzle> dataModel = [];
   List<DatamodelPuzzle> dataModel2 = [];
-  int rows = 3, columns = 3;
+  int rows = 4, columns = 4;
 
   void _incrementCounter() {
     for (var i = 1; i <= rows * columns; i++) {
       dataModel.add(DatamodelPuzzle(
         text: 'Image',
         number: i,
-        imagePath: 'assets/images/puzzle2/image_$i.png', // Add image path
+        imagePath: 'assets/images/puzzle5/image_$i.png', // Add image path
       ));
     }
   }
@@ -59,7 +58,7 @@ class _Puzzle2State extends State<Puzzle2> {
               height: 100,
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/images/giraf.png"))),
+                      image: AssetImage("assets/images/animals2.png"))),
             ),
             const SizedBox(
               height: 10,
@@ -149,7 +148,7 @@ class _Puzzle2State extends State<Puzzle2> {
             ),
             GestureDetector(
               onTap: () {
-               CustomNavigation2.nextPage2(context, const Puzzle3());
+                CustomNavigation.nextPage(context, const Puzzle5());
               },
               child: const CircleAvatar(
                 child: Icon(Icons.arrow_right_alt_rounded),
