@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:littletherapist/providers/signin_provider.dart';
-import 'package:littletherapist/screens/auth_screen/forgot_password/forgot_password.dart';
-import 'package:littletherapist/screens/auth_screen/register_screen/register_screen.dart';
+import 'package:littletherapist/screens/auth_screen/forgot_password.dart';
+import 'package:littletherapist/screens/auth_screen/register_screen.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
 

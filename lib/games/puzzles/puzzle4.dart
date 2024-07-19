@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:littletherapist/games/puzzles/puzzle5.dart';
 import 'package:littletherapist/models/datamodel_puzzle.dart';
+import 'package:littletherapist/providers/puzzle_score_provider.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
+import 'package:provider/provider.dart';
+// Ensure this is properly pathed to your ScoreProvider
 
 class Puzzle4 extends StatefulWidget {
   const Puzzle4({super.key});
@@ -14,13 +19,42 @@ class _Puzzle4State extends State<Puzzle4> {
   List<DatamodelPuzzle> dataModel = [];
   List<DatamodelPuzzle> dataModel2 = [];
   int rows = 4, columns = 4;
+  int _start = 20; // Timer countdown from 20 seconds
+  late Timer _timer;
+  double _progress = 1.0;
+
+  void startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_start > 0) {
+          _start--;
+          _progress = _start / 20.0; // Update progress based on remaining time
+        } else {
+          _timer.cancel();
+          navigateToNextPuzzle();
+        }
+      });
+    });
+  }
+
+  void navigateToNextPuzzle() {
+    CustomNavigation2.nextPage2(context, const Puzzle5());
+  }
+
+  void completePuzzle() {
+    if (_start > 0) {
+      Provider.of<PuzzleScoreProvider>(context, listen: false).addScore(20);
+    }
+    _timer.cancel();
+    navigateToNextPuzzle();
+  }
 
   void _incrementCounter() {
     for (var i = 1; i <= rows * columns; i++) {
       dataModel.add(DatamodelPuzzle(
         text: 'Image',
         number: i,
-        imagePath: 'assets/images/puzzle4/image_$i.png', // Add image path
+        imagePath: 'assets/images/puzzle4/image_$i.png',
       ));
     }
   }
@@ -37,6 +71,13 @@ class _Puzzle4State extends State<Puzzle4> {
       ));
     }
     dataModel2.shuffle();
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -55,14 +96,38 @@ class _Puzzle4State extends State<Puzzle4> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Container(
-              height: 100,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/animals.png"))),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                        value: _progress,
+                        backgroundColor: Colors.grey[300],
+                        color: Colors.blue,
+                        strokeWidth: 6,
+                      ),
+                    ),
+                    Text("${_start}s"),
+                  ],
+                ),
+                Container(
+                  width: 90,
+                  height: 100,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/animals.png"))),
+                ),
+                Text(
+                    'Score: ${Provider.of<PuzzleScoreProvider>(context).score}'),
+              ],
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -100,6 +165,10 @@ class _Puzzle4State extends State<Puzzle4> {
                         if (data.number == dataModel[index].number) {
                           dataModel[index].dataModel = data;
                           dataModel2.remove(data);
+                          if (dataModel
+                              .every((element) => element.dataModel != null)) {
+                            completePuzzle();
+                          }
                         }
                       });
                     },
