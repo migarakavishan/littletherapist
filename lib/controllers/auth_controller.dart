@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:littletherapist/models/user_model.dart';
 import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
-import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
+import 'package:littletherapist/screens/auth_screen/login_screen.dart';
 import 'package:littletherapist/screens/home_page/home_page.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:logger/logger.dart';

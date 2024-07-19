@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:littletherapist/providers/signup_provider.dart';
-import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
+import 'package:littletherapist/screens/auth_screen/login_screen.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
 

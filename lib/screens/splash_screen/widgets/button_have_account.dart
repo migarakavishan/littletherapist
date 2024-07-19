@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:littletherapist/screens/auth_screen/login_screen/login_screen.dart';
+import 'package:littletherapist/screens/auth_screen/login_screen.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
 class HaveAccountButton extends StatelessWidget {

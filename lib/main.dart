@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:littletherapist/firebase_options.dart';
 import 'package:littletherapist/providers/auth_provider.dart';
+import 'package:littletherapist/providers/puzzle_score_provider.dart';
 import 'package:littletherapist/providers/signin_provider.dart';
 import 'package:littletherapist/providers/signup_provider.dart';
 import 'package:littletherapist/screens/splash_screen/splash_screen.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => SignupProvider()),
       ChangeNotifierProvider(create: (context) => SigninProvider()),
       ChangeNotifierProvider(create: (context) => AuthProvider()),
+      ChangeNotifierProvider(create: (context) => PuzzleScoreProvider()),
     ],
     child: const MyApp(),
   ));
