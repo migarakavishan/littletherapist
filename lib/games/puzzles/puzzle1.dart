@@ -99,7 +99,7 @@ class _Puzzle1State extends State<Puzzle1> {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Stack(
                   alignment: Alignment.center,
@@ -124,8 +124,38 @@ class _Puzzle1State extends State<Puzzle1> {
                       image: DecorationImage(
                           image: AssetImage("assets/images/turtle.jpg"))),
                 ),
-                Text(
-                    'Score: ${Provider.of<PuzzleScoreProvider>(context).score}'),
+                Row(
+                  children: [
+                    Container(
+                      width: 45,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.blue.shade500,
+                          borderRadius: const BorderRadiusDirectional.only(
+                              topStart: Radius.circular(10),
+                              bottomStart: Radius.circular(10))),
+                      child: const Center(
+                          child: Text(
+                        "Score",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                    ),
+                    Container(
+                      width: 45,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.blue.shade400,
+                          borderRadius: const BorderRadiusDirectional.only(
+                              topEnd: Radius.circular(10),
+                              bottomEnd: Radius.circular(10))),
+                      child: Center(
+                        child: Text(
+                            '${Provider.of<PuzzleScoreProvider>(context).score}',
+                            style: const TextStyle(color: Colors.white)),
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
             const SizedBox(
