@@ -22,7 +22,7 @@ class _Puzzle1State extends State<Puzzle1> {
   int rows = 2, columns = 2;
 
   late Timer _timer;
-  int _start = 20;
+  int _start = 30;
   double _progress = 1.0;
 
   void startTimer() {
