@@ -18,7 +18,7 @@ class _Puzzle2State extends State<Puzzle2> {
   List<DatamodelPuzzle> dataModel = [];
   List<DatamodelPuzzle> dataModel2 = [];
   int rows = 3, columns = 3;
-  int _start = 20;
+  int _start = 30;
   late Timer _timer;
   double _progress = 1.0;
 

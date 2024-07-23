@@ -20,7 +20,7 @@ class _Puzzle3State extends State<Puzzle3> {
   List<DatamodelPuzzle> dataModel = [];
   List<DatamodelPuzzle> dataModel2 = [];
   int rows = 3, columns = 3;
-  int _start = 20; // Timer countdown from 20 seconds
+  int _start = 30; // Timer countdown from 20 seconds
   late Timer _timer;
   double _progress = 1.0;
 
