@@ -17,7 +17,7 @@ class _Puzzle5State extends State<Puzzle5> {
   List<DatamodelPuzzle> dataModel = [];
   List<DatamodelPuzzle> dataModel2 = [];
   int rows = 4, columns = 4;
-  int _start = 30; // Timer countdown from 20 seconds
+  int _start = 30;
   late Timer _timer;
   double _progress = 1.0;
 
@@ -26,7 +26,7 @@ class _Puzzle5State extends State<Puzzle5> {
       setState(() {
         if (_start > 0) {
           _start--;
-          _progress = _start / 20.0; // Update progress based on remaining time
+          _progress = _start / 30.0; // Update progress based on remaining time
         } else {
           _timer.cancel();
         }
