@@ -30,7 +30,7 @@ class _Puzzle1State extends State<Puzzle1> {
       setState(() {
         if (_start > 0) {
           _start--;
-          _progress = _start / 20.0; // Update progress based on remaining time
+          _progress = _start / 30.0; // Update progress based on remaining time
         } else {
           _timer.cancel();
           navigateToNextPuzzle();
