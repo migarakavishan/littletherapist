@@ -13,6 +13,15 @@ class _DrawingPadState extends State<DrawingPad> {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: const Color(0xFF4CA5C1),
+        title: const Text(
+          "Drawing Pad",
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
       backgroundColor: Colors.amber,
       body: DrawingBoard(
         background: Container(

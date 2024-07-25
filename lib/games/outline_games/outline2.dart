@@ -76,7 +76,7 @@ class _Outline2State extends State<Outline2> {
                         builder: (context, candidateData, rejectedData) {
                           return isLargeAppleDropped
                               ? Image.asset(
-                                  "assets/images/apple.png",
+                                  "assets/images/appleright.png",
                                   height: 200,
                                 )
                               : Image.asset(
