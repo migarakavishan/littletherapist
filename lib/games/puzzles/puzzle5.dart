@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:littletherapist/models/datamodel_puzzle.dart';
 import 'package:littletherapist/providers/puzzle_score_provider.dart';
+import 'package:littletherapist/screens/home_page/home_page.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +19,7 @@ class _Puzzle5State extends State<Puzzle5> {
   List<DatamodelPuzzle> dataModel = [];
   List<DatamodelPuzzle> dataModel2 = [];
   int rows = 4, columns = 4;
-  int _start = 30;
+  int _start = 60;
   late Timer _timer;
   double _progress = 1.0;
 
@@ -26,7 +28,7 @@ class _Puzzle5State extends State<Puzzle5> {
       setState(() {
         if (_start > 0) {
           _start--;
-          _progress = _start / 30.0; // Update progress based on remaining time
+          _progress = _start / 60.0; // Update progress based on remaining time
         } else {
           _timer.cancel();
         }
@@ -35,25 +37,24 @@ class _Puzzle5State extends State<Puzzle5> {
   }
 
   void showCompletionDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Puzzle Completed"),
-          content: const Text("Congratulations, you've completed all puzzles!"),
-          actions: <Widget>[
-            TextButton(
-              child: const Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-                CustomNavigation.nextPage(context,
-                    const Puzzle5()); // You might want to change this to navigate to a completion or home page
-              },
-            ),
-          ],
-        );
-      },
-    );
+    final score =
+        Provider.of<PuzzleScoreProvider>(context, listen: false).score;
+    CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        text: "You've completed all puzzles!\nYour final score is: $score",
+        confirmBtnText: 'Home',
+        confirmBtnColor: Colors.green,
+        onConfirmBtnTap: () {
+          Navigator.of(context).pop(); // Close the alert
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            navigateHome(); // Ensure this is called after the alert is closed
+          }); // Navigate home or to any other screen
+        });
+  }
+
+  void navigateHome() {
+    CustomNavigation.nextPage(context, const HomePage());
   }
 
   void completePuzzle() {
@@ -236,7 +237,7 @@ class _Puzzle5State extends State<Puzzle5> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: LongPressDraggable<DatamodelPuzzle>(
+                    child: Draggable<DatamodelPuzzle>(
                       data: dataModel2[index],
                       feedback: Material(
                         child: Image.asset(
@@ -261,6 +262,14 @@ class _Puzzle5State extends State<Puzzle5> {
             const SizedBox(
               height: 50,
             ),
+            GestureDetector(
+              onTap: () {
+                showCompletionDialog();
+              },
+              child: const CircleAvatar(
+                child: Icon(Icons.arrow_right_alt_rounded),
+              ),
+            )
             // Removed the GestureDetector that was navigating to the same page
           ],
         ),

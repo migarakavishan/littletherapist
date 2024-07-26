@@ -22,7 +22,7 @@ class _Puzzle1State extends State<Puzzle1> {
   int rows = 2, columns = 2;
 
   late Timer _timer;
-  int _start = 30;
+  int _start = 60;
   double _progress = 1.0;
 
   void startTimer() {
@@ -30,7 +30,7 @@ class _Puzzle1State extends State<Puzzle1> {
       setState(() {
         if (_start > 0) {
           _start--;
-          _progress = _start / 30.0; // Update progress based on remaining time
+          _progress = _start / 60.0; // Update progress based on remaining time
         } else {
           _timer.cancel();
           navigateToNextPuzzle();
@@ -223,7 +223,7 @@ class _Puzzle1State extends State<Puzzle1> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: LongPressDraggable<DatamodelPuzzle>(
+                    child: Draggable<DatamodelPuzzle>(
                       data: dataModel2[index],
                       feedback: Material(
                         child: Image.asset(
