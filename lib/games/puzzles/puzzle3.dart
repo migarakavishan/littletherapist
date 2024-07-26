@@ -20,7 +20,7 @@ class _Puzzle3State extends State<Puzzle3> {
   List<DatamodelPuzzle> dataModel = [];
   List<DatamodelPuzzle> dataModel2 = [];
   int rows = 3, columns = 3;
-  int _start = 30; // Timer countdown from 20 seconds
+  int _start = 60; // Timer countdown from 20 seconds
   late Timer _timer;
   double _progress = 1.0;
 
@@ -29,7 +29,7 @@ class _Puzzle3State extends State<Puzzle3> {
       setState(() {
         if (_start > 0) {
           _start--;
-          _progress = _start / 30.0; // Update progress based on remaining time
+          _progress = _start / 60.0; // Update progress based on remaining time
         } else {
           _timer.cancel();
           navigateToNextPuzzle();
@@ -222,7 +222,7 @@ class _Puzzle3State extends State<Puzzle3> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: LongPressDraggable<DatamodelPuzzle>(
+                    child: Draggable<DatamodelPuzzle>(
                       data: dataModel2[index],
                       feedback: Material(
                         child: Image.asset(

@@ -46,6 +46,7 @@ dependencies:
   image_cropper: ^7.1.0
   riverpod: ^2.5.1
   flutter_drawing_board: ^0.8.1
+  cool_alert: ^2.0.1
 
 dev_dependencies:
   flutter_test:
