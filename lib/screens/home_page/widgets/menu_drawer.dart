@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:littletherapist/controllers/auth_controller.dart';
 import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
 import 'package:littletherapist/screens/edit_profile/edit_profile.dart';
+import 'package:littletherapist/screens/points_screen/point_screen.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
 
@@ -80,7 +81,13 @@ class MenuDrawer extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.score),
           title: const Text("My Points"),
-          onTap: () {},
+          onTap: () {
+            final authProvider =
+                Provider.of<auth_provider.AuthProvider>(context, listen: false);
+            final userId = authProvider.user!.uid;
+            AuthController().fetchAndListenUserData(context, userId);
+            CustomNavigation.nextPage(context, const PointScreen());
+          },
         ),
         ListTile(
           leading: const Icon(Icons.settings),

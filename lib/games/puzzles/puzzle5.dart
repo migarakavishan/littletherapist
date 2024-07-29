@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:littletherapist/models/datamodel_puzzle.dart';
+import 'package:littletherapist/providers/auth_provider.dart';
 import 'package:littletherapist/providers/puzzle_score_provider.dart';
 import 'package:littletherapist/screens/home_page/home_page.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class Puzzle5 extends StatefulWidget {
@@ -48,9 +51,28 @@ class _Puzzle5State extends State<Puzzle5> {
         onConfirmBtnTap: () {
           Navigator.of(context).pop(); // Close the alert
           WidgetsBinding.instance.addPostFrameCallback((_) {
+            saveScore(score);
             navigateHome(); // Ensure this is called after the alert is closed
           }); // Navigate home or to any other screen
         });
+  }
+
+  void saveScore(int score) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    if (authProvider.user == null) {
+      Logger().e('Error: No user signed in!');
+      return;
+    }
+
+    final userId = authProvider
+        .user?.uid; // Get user ID from the authenticated Firebase user
+    FirebaseFirestore.instance.collection('Users').doc(userId).update({
+      'score.puzzleScore': score,
+    }).then((_) {
+      Logger().e('Score updated successfully!');
+    }).catchError((error) {
+      Logger().e('Failed to update score: $error');
+    });
   }
 
   void navigateHome() {

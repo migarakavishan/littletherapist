@@ -27,7 +27,11 @@ class AuthController {
             CustomNavigation.nextPage(context, const HomePage());
           } else {
             Provider.of<auth_provider.AuthProvider>(context, listen: false)
-                .setUserModel(UserModel(name: "", image: "https://i.sstatic.net/l60Hf.png", email: user.uid, uid: user.uid));
+                .setUserModel(UserModel(
+                    name: "",
+                    image: "https://i.sstatic.net/l60Hf.png",
+                    email: user.uid,
+                    uid: user.uid));
             CustomNavigation.nextPage(context, const HomePage());
           }
         });
@@ -109,4 +113,46 @@ class AuthController {
       return null;
     }
   }
+
+  Future<void> updateUserScores(
+      BuildContext context,
+      String uid,
+      int puzzleScore,
+      int outliningScore,
+      int languageScore,
+      int mathScore) async {
+    try {
+      await users.doc(uid).update({
+        "score.puzzleScore": puzzleScore,
+        "score.outliningScore": outliningScore,
+        "score.languageScore": languageScore,
+        "score.mathScore": mathScore,
+      });
+      Logger().i("User scores updated successfully!");
+
+      // Fetch the updated user data and update AuthProvider
+      fetchUserData(uid).then((updatedUser) {
+        if (updatedUser != null) {
+          Provider.of<auth_provider.AuthProvider>(context, listen: false)
+              .setUserModel(updatedUser);
+        }
+      });
+    } catch (e) {
+      Logger().e("Failed to update user scores: $e");
+      throw Exception("Failed to update user scores");
+    }
+  }
+
+
+  void fetchAndListenUserData(BuildContext context, String userId) {
+  users.doc(userId).snapshots().listen((snapshot) {
+    if (snapshot.exists) {
+      UserModel updatedUser = UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
+      Provider.of<auth_provider.AuthProvider>(context, listen: false).setUserModel(updatedUser);
+    } else {
+      Logger().e("No user data found!");
+    }
+  }, onError: (error) => Logger().e("Error listening to user data: $error"));
+}
+
 }
