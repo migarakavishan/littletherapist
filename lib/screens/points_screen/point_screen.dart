@@ -78,7 +78,7 @@ class _PointScreenState extends State<PointScreen> {
                               ),
                               backgroundColor: Colors.grey,
                               progressColor: Colors.blue,
-                              linearStrokeCap: LinearStrokeCap.roundAll,
+                              barRadius: const Radius.circular(20),
                             ),
                             Text(
                               feedbackText,
@@ -115,7 +115,7 @@ class _PointScreenState extends State<PointScreen> {
                               ),
                               backgroundColor: Colors.grey,
                               progressColor: Colors.blue,
-                              linearStrokeCap: LinearStrokeCap.roundAll,
+                              barRadius: const Radius.circular(20),
                             ),
                             Text(
                               feedbackText,
@@ -152,7 +152,7 @@ class _PointScreenState extends State<PointScreen> {
                               ),
                               backgroundColor: Colors.grey,
                               progressColor: Colors.blue,
-                              linearStrokeCap: LinearStrokeCap.roundAll,
+                              barRadius: const Radius.circular(20),
                             ),
                             Text(
                               feedbackText,
@@ -189,7 +189,7 @@ class _PointScreenState extends State<PointScreen> {
                               ),
                               backgroundColor: Colors.grey,
                               progressColor: Colors.blue,
-                              linearStrokeCap: LinearStrokeCap.roundAll,
+                              barRadius: const Radius.circular(20),
                             ),
                             Text(
                               feedbackText,
