@@ -166,7 +166,7 @@ class _PointScreenState extends State<PointScreen> {
                       }),
                   const SizedBox(height: 30),
                   const Text(
-                    "Math Games",
+                    "Math Game",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                   Selector<AuthProvider, int>(
