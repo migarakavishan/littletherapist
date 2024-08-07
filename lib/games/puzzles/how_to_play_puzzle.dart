@@ -21,7 +21,7 @@ class HowToPlayPuzzle extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children:[
             const Text(
               'Getting Started',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
