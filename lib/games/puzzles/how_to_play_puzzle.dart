@@ -27,10 +27,10 @@ class HowToPlayPuzzle extends StatelessWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Learn the basics of how to play the puzzle games and get ready to challenge your kid problem-solving skills.',
-              style: TextStyle(fontSize: 18),
-            ),
+            // const Text(
+            //   'Learn the basics of how to play the puzzle games and get ready to challenge your kid problem-solving skills.',
+            //   style: TextStyle(fontSize: 18),
+            // ),
             const Text(
               'These games also help children improve their memory, spatial awareness, and color recognition.',
               style: TextStyle(fontSize: 18),
