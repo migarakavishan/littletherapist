@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:littletherapist/games/puzzles/puzzle1.dart';
+import 'package:littletherapist/games/outline_games/outline1.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
-class HowToPlayPuzzle extends StatelessWidget {
-  const HowToPlayPuzzle({super.key});
+class HowToPlayOutline extends StatelessWidget {
+  const HowToPlayOutline({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,43 +21,29 @@ class HowToPlayPuzzle extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
+          children: [
             const Text(
-              'Getting Started',
+              'Welcome to Outline Games!',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const Text(
-              'Learn the basics of how to play the puzzle games and get ready to challenge your kid problem-solving skills.',
-              style: TextStyle(fontSize: 18),
-            ),
-            const Text(
-              'These games also help children improve their memory, spatial awareness, and color recognition.',
+              'Outline games challenge your precision and attention to detail. Follow these steps to master the game.',
               style: TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
             const Text(
-              'Step-by-Step Instructions',
+              'Game Instructions',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const Text(
-              '1. Begin with easy puzzles to understand the game layout and mechanics.',
+              '1. Start with a basic outline displayed on your screen.',
               style: TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 10),
             const Text(
-              '2. Drag and drop the puzzle pieces to their correct positions to form a complete picture.',
-              style: TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              '3. Use the image preview as a guide to know what the completed puzzle should look like.',
-              style: TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              '4. Try to complete the puzzle in the shortest time possible to increase your score.',
+              '2. Drag and drop each items into correct shadow.',
               style: TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
@@ -67,7 +53,7 @@ class HowToPlayPuzzle extends StatelessWidget {
                       backgroundColor: WidgetStatePropertyAll(Colors.blue),
                     ),
                     onPressed: () {
-                      CustomNavigation2.nextPage2(context, const Puzzle1());
+                      CustomNavigation2.nextPage2(context, const Outline1());
                     },
                     child: const Text(
                       "Start Playing",
