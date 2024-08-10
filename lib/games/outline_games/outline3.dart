@@ -6,14 +6,14 @@ import 'package:littletherapist/providers/outline_score_provider.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
 
-class Outline1 extends StatefulWidget {
-  const Outline1({super.key});
+class Outline3 extends StatefulWidget {
+  const Outline3({super.key});
 
   @override
-  State<Outline1> createState() => _Outline1State();
+  State<Outline3> createState() => _Outline3State();
 }
 
-class _Outline1State extends State<Outline1> {
+class _Outline3State extends State<Outline3> {
   bool isDropped = false;
 
   late Timer _timer;
@@ -38,7 +38,7 @@ class _Outline1State extends State<Outline1> {
   }
 
   void navigateToNextOutline() {
-    CustomNavigation2.nextPage2(context, const Outline2());
+    CustomNavigation2.nextPage2(context, const Outline3());
   }
 
   void completeOutline() {
@@ -103,7 +103,7 @@ class _Outline1State extends State<Outline1> {
                       ],
                     ),
                     const Text(
-                      "Level 1",
+                      "Level 3",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -144,61 +144,63 @@ class _Outline1State extends State<Outline1> {
                   ],
                 ),
               ),
+              const SizedBox(height: 10),
               Container(
                 height: 300,
-                decoration: const BoxDecoration(color: Color(0xFFAEAEAE)),
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/playground.png'))),
                 child: Stack(
                   children: [
                     Positioned(
-                      top: 50,
-                      left: 80,
-                      child: DragTarget<String>(
-                        onWillAccept: (data) =>
-                            data ==
-                            "apple", // Ensures only 'apple' can be dropped
-                        onAccept: (data) {
-                          if (data == "apple") {
-                            completeOutline(); // Complete the puzzle if the correct item is dropped
-                          }
-                        },
-                        builder: (context, candidateData, rejectedData) {
-                          return isDropped
-                              ? Image.asset(
-                                  "assets/images/appleright.png",
-                                  height: 200,
-                                )
-                              : Image.asset(
-                                  "assets/images/appledarkright.png",
-                                  height: 200,
-                                );
-                        },
-                      ),
-                    )
+                        top: 110,
+                        left: 150,
+                        child: DragTarget<String>(
+                          onAcceptWithDetails: (data) {
+                            setState(() {
+                              isDropped = true;
+                            });
+                          },
+                          builder: (context, candidateData, rejectedData) {
+                            return isDropped
+                                ? Image.asset(
+                                    "assets/images/girl.png",
+                                    height: 150,
+                                  )
+                                : Image.asset(
+                                    "assets/images/girlwhite.png",
+                                    height: 150,
+                                  );
+                          },
+                        ))
                   ],
                 ),
               ),
               Container(
                 height: 300,
-                decoration: const BoxDecoration(color: Color(0xFFFFA7A7)),
+                decoration: const BoxDecoration(color: Colors.grey),
                 child: Stack(
                   children: [
                     Positioned(
-                        bottom: 40,
-                        left: 80,
+                        bottom: 70,
+                        left: 140,
                         child: Draggable<String>(
-                            data: "apple",
+                            data: "girl",
                             feedback: Image.asset(
-                              "assets/images/appleright.png",
-                              height: 200,
+                              "assets/images/girl.png",
+                              height: 150,
                               opacity: const AlwaysStoppedAnimation(0.5),
                             ),
                             childWhenDragging: Container(),
                             child: Image.asset(
-                              "assets/images/appleright.png",
-                              height: 200,
+                              "assets/images/girl.png",
+                              height: 150,
                             )))
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               GestureDetector(
                 onTap: () {
