@@ -178,7 +178,7 @@ class _Outline3State extends State<Outline3> {
               ),
               Container(
                 height: 300,
-                decoration: const BoxDecoration(color: Colors.grey),
+                decoration: const BoxDecoration(color: Colors.purpleAccent),
                 child: Stack(
                   children: [
                     Positioned(
