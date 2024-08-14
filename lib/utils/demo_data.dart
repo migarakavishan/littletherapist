@@ -3,6 +3,7 @@ import 'package:littletherapist/games/outline_games/how_to_play_outline.dart';
 import 'package:littletherapist/games/outline_games/outline1.dart';
 import 'package:littletherapist/games/outline_games/outline2.dart';
 import 'package:littletherapist/games/outline_games/outline3.dart';
+import 'package:littletherapist/games/outline_games/outline4.dart';
 import 'package:littletherapist/games/puzzles/how_to_play_puzzle.dart';
 import 'package:littletherapist/games/puzzles/puzzle1.dart';
 import 'package:littletherapist/games/puzzles/puzzle2.dart';
@@ -49,6 +50,7 @@ class DemoData {
     OutlineGamesModel(id: 1, name: 'Level 1', widget: const Outline1()),
     OutlineGamesModel(id: 2, name: 'Level 2', widget: const Outline2()),
     OutlineGamesModel(id: 3, name: 'Level 3', widget: const Outline3()),
+    OutlineGamesModel(id: 4, name: 'Level 4', widget: const Outline4()),
   ];
 
   static List<PuzzleModel> puzzlemodel = [
