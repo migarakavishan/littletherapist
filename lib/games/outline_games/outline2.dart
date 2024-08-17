@@ -104,7 +104,7 @@ class _Outline2State extends State<Outline2> {
                       ],
                     ),
                     const Text(
-                      "Level 1",
+                      "Level 2",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
