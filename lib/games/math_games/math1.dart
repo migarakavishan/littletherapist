@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:littletherapist/games/math_games/math2.dart';
 import 'package:littletherapist/games/outline_games/outline3.dart';
 import 'package:littletherapist/providers/math_score_provide.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
@@ -473,7 +474,7 @@ class _Math1State extends State<Math1> {
               ),
               GestureDetector(
                 onTap: () {
-                  CustomNavigation2.nextPage2(context, const Outline3());
+                  CustomNavigation2.nextPage2(context, const Math2());
                 },
                 child: const CircleAvatar(
                   child: Icon(Icons.arrow_right_alt_rounded),
