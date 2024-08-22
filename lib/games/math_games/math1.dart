@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:littletherapist/games/math_games/math2.dart';
-import 'package:littletherapist/games/outline_games/outline3.dart';
 import 'package:littletherapist/providers/math_score_provide.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +37,7 @@ class _Math1State extends State<Math1> {
           _progress = _start / 60.0;
         } else {
           _timer.cancel();
+          navigateToNextOutline();
           if (isNum1Dropped &&
               isNum2Dropped &&
               isNum3Dropped &&
@@ -62,7 +62,7 @@ class _Math1State extends State<Math1> {
 
   void navigateToNextOutline() {
     CustomNavigation2.nextPage2(
-        context, const Outline3()); // Assuming there's another level
+        context, const Math2()); // Assuming there's another level
   }
 
   @override
@@ -168,6 +168,7 @@ class _Math1State extends State<Math1> {
                       )
                     ]),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -193,6 +194,12 @@ class _Math1State extends State<Math1> {
                               onAccept: (data) {
                                 setState(() {
                                   isNum1Dropped = true;
+                                  if (isNum1Dropped &&
+                                      isNum2Dropped &&
+                                      isNum3Dropped &&
+                                      isNum4Dropped) {
+                                    completeMath();
+                                  }
                                 });
                               },
                               builder: (context, candidateData, rejectedData) {
@@ -243,6 +250,12 @@ class _Math1State extends State<Math1> {
                               onAccept: (data) {
                                 setState(() {
                                   isNum2Dropped = true;
+                                  if (isNum1Dropped &&
+                                      isNum2Dropped &&
+                                      isNum3Dropped &&
+                                      isNum4Dropped) {
+                                    completeMath();
+                                  }
                                 });
                               },
                               builder: (context, candidateData, rejectedData) {
@@ -297,6 +310,12 @@ class _Math1State extends State<Math1> {
                               onAccept: (data) {
                                 setState(() {
                                   isNum3Dropped = true;
+                                  if (isNum1Dropped &&
+                                      isNum2Dropped &&
+                                      isNum3Dropped &&
+                                      isNum4Dropped) {
+                                    completeMath();
+                                  }
                                 });
                               },
                               builder: (context, candidateData, rejectedData) {
