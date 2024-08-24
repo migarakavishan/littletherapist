@@ -103,7 +103,7 @@ class _Math3State extends State<Math3> {
                     ],
                   ),
                   const Text(
-                    "Level 2",
+                    "Level 3",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -149,7 +149,7 @@ class _Math3State extends State<Math3> {
             ),
             Container(
               width: 500,
-              height: 450,
+              height: 400,
               decoration: BoxDecoration(
                   color: Colors.blue.shade200,
                   borderRadius: BorderRadius.circular(15),
@@ -223,7 +223,7 @@ class _Math3State extends State<Math3> {
               height: 10,
             ),
             Container(
-              height: 200,
+              height: 150,
               width: 500,
               decoration: BoxDecoration(
                   color: Colors.blueAccent,
@@ -293,6 +293,17 @@ class _Math3State extends State<Math3> {
                 ],
               ),
             ),
+            const SizedBox(
+              height: 50,
+            ),
+            GestureDetector(
+              onTap: () {
+                CustomNavigation2.nextPage2(context, const Math4());
+              },
+              child: const CircleAvatar(
+                child: Icon(Icons.arrow_right_alt_rounded),
+              ),
+            )
           ],
         ),
       ),
