@@ -3,6 +3,7 @@ import 'package:littletherapist/games/math_games/math1.dart';
 import 'package:littletherapist/games/math_games/math2.dart';
 import 'package:littletherapist/games/math_games/math3.dart';
 import 'package:littletherapist/games/math_games/math4.dart';
+import 'package:littletherapist/games/math_games/math5.dart';
 import 'package:littletherapist/games/outline_games/how_to_play_outline.dart';
 import 'package:littletherapist/games/outline_games/outline1.dart';
 import 'package:littletherapist/games/outline_games/outline2.dart';
@@ -72,6 +73,7 @@ class DemoData {
     MathModel(id: 2, name: "Level 2", widget: const Math2()),
     MathModel(id: 3, name: "Level 3", widget: const Math3()),
     MathModel(id: 4, name: "Level 4", widget: const Math4()),
+    MathModel(id: 5, name: "Level 5", widget: const Math5()),
   ];
 
   static List<DrawingPadModel> drawingPadmodel = [
