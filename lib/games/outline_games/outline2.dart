@@ -158,6 +158,9 @@ class _Outline2State extends State<Outline2> {
                         onAccept: (data) {
                           setState(() {
                             isSmallAppleDropped = true;
+                            if (isSmallAppleDropped && isLargeAppleDropped) {
+                              completeOutline();
+                            }
                           });
                         },
                         builder: (context, candidateData, rejectedData) {
