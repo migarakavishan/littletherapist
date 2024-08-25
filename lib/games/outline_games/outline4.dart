@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:littletherapist/games/outline_games/outline3.dart';
+import 'package:littletherapist/games/outline_games/outline5.dart';
 import 'package:littletherapist/providers/outline_score_provider.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
@@ -56,7 +56,7 @@ class _Outline4State extends State<Outline4> {
 
   void navigateToNextOutline() {
     CustomNavigation2.nextPage2(
-        context, const Outline3()); // Assuming there's another level
+        context, const Outline5()); // Assuming there's another level
   }
 
   @override
@@ -244,7 +244,7 @@ class _Outline4State extends State<Outline4> {
             ),
             GestureDetector(
               onTap: () {
-                CustomNavigation2.nextPage2(context, const Outline3());
+                CustomNavigation2.nextPage2(context, const Outline5());
               },
               child: const CircleAvatar(
                 child: Icon(Icons.arrow_right_alt_rounded),

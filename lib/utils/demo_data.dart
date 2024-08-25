@@ -1,5 +1,5 @@
 import 'package:littletherapist/games/drawing_pad/drawing_pad.dart';
-import 'package:littletherapist/games/learn_words_games/learn_word1.dart';
+import 'package:littletherapist/games/language_games/language1.dart';
 import 'package:littletherapist/games/math_games/math1.dart';
 import 'package:littletherapist/games/math_games/math2.dart';
 import 'package:littletherapist/games/math_games/math3.dart';
@@ -37,7 +37,7 @@ class DemoData {
         eachGames: DemoData.puzzlemodel),
     GameModel(
         id: 3,
-        title: 'Learn Words',
+        title: 'Language Games',
         logo: 'assets/images/learnwords.png',
         eachGames: DemoData.learnwordsmodel),
     GameModel(
@@ -78,8 +78,8 @@ class DemoData {
     MathModel(id: 5, name: "Level 5", widget: const Math5()),
   ];
 
-  static List<LearnWordsModel> learnwordsmodel = [
-    LearnWordsModel(id: 1, name: "Level 1", widget: const LearnWord1())
+  static List<LanguageGamesModel> learnwordsmodel = [
+    LanguageGamesModel(id: 1, name: "Level 1", widget: const Language1())
   ];
 
   static List<DrawingPadModel> drawingPadmodel = [

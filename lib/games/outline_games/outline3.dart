@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:littletherapist/games/outline_games/outline2.dart';
+import 'package:littletherapist/games/outline_games/outline4.dart';
 import 'package:littletherapist/providers/outline_score_provider.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +38,7 @@ class _Outline3State extends State<Outline3> {
   }
 
   void navigateToNextOutline() {
-    CustomNavigation2.nextPage2(context, const Outline3());
+    CustomNavigation2.nextPage2(context, const Outline4());
   }
 
   void completeOutline() {
@@ -204,7 +204,7 @@ class _Outline3State extends State<Outline3> {
               ),
               GestureDetector(
                 onTap: () {
-                  CustomNavigation2.nextPage2(context, const Outline2());
+                  CustomNavigation2.nextPage2(context, const Outline4());
                 },
                 child: const CircleAvatar(
                   child: Icon(Icons.arrow_right_alt_rounded),

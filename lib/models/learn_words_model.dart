@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-class LearnWordsModel {
+class LanguageGamesModel {
   int id;
   String name;
   final Widget widget;
 
-  LearnWordsModel({required this.id, required this.name, required this.widget});
+  LanguageGamesModel(
+      {required this.id, required this.name, required this.widget});
 }
