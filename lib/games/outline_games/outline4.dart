@@ -161,6 +161,9 @@ class _Outline4State extends State<Outline4> {
                           onAccept: (data) {
                             setState(() {
                               isCarDropped = true;
+                              if (isCarDropped && isCar2Dropped) {
+                                completeOutline();
+                              }
                             });
                           },
                           builder: (context, candidateData, rejectedData) {
