@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:littletherapist/firebase_options.dart';
 import 'package:littletherapist/providers/auth_provider.dart';
+import 'package:littletherapist/providers/language_score_provider.dart';
 import 'package:littletherapist/providers/math_score_provide.dart';
 import 'package:littletherapist/providers/outline_score_provider.dart';
 import 'package:littletherapist/providers/puzzle_score_provider.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => PuzzleScoreProvider()),
       ChangeNotifierProvider(create: (context) => OutlineScoreProvider()),
       ChangeNotifierProvider(create: (context) => MathScoreProvider()),
+      ChangeNotifierProvider(create: (context) => LanguageScoreProvider()),
     ],
     child: const MyApp(),
   ));
