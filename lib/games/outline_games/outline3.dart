@@ -29,6 +29,7 @@ class _Outline3State extends State<Outline3> {
         } else {
           _timer.cancel();
           if (!isDropped) {
+            
             // If not dropped correctly till timer expiry
             // Optionally show a timeout dialog
           }
@@ -37,9 +38,7 @@ class _Outline3State extends State<Outline3> {
     });
   }
 
-  void navigateToNextOutline() {
-    CustomNavigation2.nextPage2(context, const Outline4());
-  }
+  
 
   void completeOutline() {
     if (_start > 0 && !isDropped) {
@@ -51,6 +50,11 @@ class _Outline3State extends State<Outline3> {
       setState(() {}); // Update the UI
     }
   }
+
+  void navigateToNextOutline() {
+    CustomNavigation2.nextPage2(context, const Outline4());
+  }
+
 
   @override
   void dispose() {
@@ -156,10 +160,11 @@ class _Outline3State extends State<Outline3> {
                         top: 110,
                         left: 150,
                         child: DragTarget<String>(
-                          onAcceptWithDetails: (data) {
-                            setState(() {
-                              isDropped = true;
-                            });
+                          onWillAccept: (data) => data == "girl",
+                          onAccept: (data) {
+                            if (data == "girl") {
+                                completeOutline();
+                              }
                           },
                           builder: (context, candidateData, rejectedData) {
                             return isDropped

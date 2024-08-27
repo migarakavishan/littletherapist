@@ -1,7 +1,13 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:littletherapist/providers/auth_provider.dart';
 import 'package:littletherapist/providers/outline_score_provider.dart';
+import 'package:littletherapist/screens/home_page/home_page.dart';
+import 'package:littletherapist/utils/navigation/custom_navigation.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class Outline5 extends StatefulWidget {
@@ -48,18 +54,52 @@ class _Outline5State extends State<Outline5> {
     });
   }
 
+  void showCompletionDialog() {
+    final score =
+        Provider.of<OutlineScoreProvider>(context, listen: false).score;
+    CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        text: "You've completed all Outlines!\nYour final score is: $score",
+        confirmBtnText: 'Home',
+        confirmBtnColor: Colors.green,
+        onConfirmBtnTap: () {
+          Navigator.of(context).pop(); // Close the alert
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            saveScore(score);
+            navigateHome(); // Ensure this is called after the alert is closed
+          }); // Navigate home or to any other screen
+        });
+  }
+
+  void saveScore(int score) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    if (authProvider.user == null) {
+      Logger().e('Error: No user signed in!');
+      return;
+    }
+
+    final userId = authProvider
+        .user?.uid; // Get user ID from the authenticated Firebase user
+    FirebaseFirestore.instance.collection('Users').doc(userId).update({
+      'score.outliningScore': score,
+    }).then((_) {
+      Logger().e('Score updated successfully!');
+    }).catchError((error) {
+      Logger().e('Failed to update score: $error');
+    });
+  }
+
+  void navigateHome() {
+    CustomNavigation.nextPage(context, const HomePage());
+  }
+
   void completeOutline() {
     if (_start > 0) {
       Provider.of<OutlineScoreProvider>(context, listen: false).addScore(20);
-      navigateToNextOutline();
     }
     _timer.cancel();
-    navigateToNextOutline();
-  }
-
-  void navigateToNextOutline() {
-    // CustomNavigation2.nextPage2(
-    //     context, const Outline5()); // Assuming there's another level
+    showCompletionDialog();
   }
 
   @override
@@ -345,7 +385,7 @@ class _Outline5State extends State<Outline5> {
             ),
             GestureDetector(
               onTap: () {
-                // CustomNavigation2.nextPage2(context, const Outline5());
+                showCompletionDialog();
               },
               child: const CircleAvatar(
                 child: Icon(Icons.arrow_right_alt_rounded),

@@ -214,7 +214,7 @@ class _Outline4State extends State<Outline4> {
                         data: "car",
                         feedback: Image.asset(
                           "assets/images/car.png",
-                          width: 90,
+                          height: 50,
                           opacity: const AlwaysStoppedAnimation(0.5),
                         ),
                         childWhenDragging: Container(),
@@ -230,7 +230,7 @@ class _Outline4State extends State<Outline4> {
                         data: "car2",
                         feedback: Image.asset(
                           "assets/images/car2.png",
-                          width: 90,
+                          height: 60,
                           opacity: const AlwaysStoppedAnimation(0.5),
                         ),
                         childWhenDragging: Container(),

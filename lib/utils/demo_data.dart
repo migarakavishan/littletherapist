@@ -1,5 +1,9 @@
 import 'package:littletherapist/games/drawing_pad/drawing_pad.dart';
 import 'package:littletherapist/games/language_games/language1.dart';
+import 'package:littletherapist/games/language_games/language2.dart';
+import 'package:littletherapist/games/language_games/language3.dart';
+import 'package:littletherapist/games/language_games/language4.dart';
+import 'package:littletherapist/games/language_games/language5.dart';
 import 'package:littletherapist/games/math_games/math1.dart';
 import 'package:littletherapist/games/math_games/math2.dart';
 import 'package:littletherapist/games/math_games/math3.dart';
@@ -81,7 +85,11 @@ class DemoData {
   ];
 
   static List<LanguageGamesModel> learnwordsmodel = [
-    LanguageGamesModel(id: 1, name: "Level 1", widget: const Language1())
+    LanguageGamesModel(id: 1, name: "Level 1", widget: const Language1()),
+    LanguageGamesModel(id: 2, name: "Level 2", widget: const Language2()),
+    LanguageGamesModel(id: 3, name: "Level 3", widget: const Language3()),
+    LanguageGamesModel(id: 4, name: "Level 4", widget: const Language4()),
+    LanguageGamesModel(id: 5, name: "Level 5", widget: const Language5()),
   ];
 
   static List<DrawingPadModel> drawingPadmodel = [

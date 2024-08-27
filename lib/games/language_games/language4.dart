@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:littletherapist/games/language_games/language3.dart';
 import 'package:littletherapist/providers/language_score_provider.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
 
-class Language2 extends StatefulWidget {
-  const Language2({super.key});
+class Language4 extends StatefulWidget {
+  const Language4({super.key});
 
   @override
-  State<Language2> createState() => _Language2State();
+  State<Language4> createState() => _Language4State();
 }
 
-class _Language2State extends State<Language2>
+class _Language4State extends State<Language4>
     with SingleTickerProviderStateMixin {
   final FlutterTts flutterTts = FlutterTts();
   late AnimationController _animationController;
@@ -24,7 +23,7 @@ class _Language2State extends State<Language2>
   void initState() {
     super.initState();
     initTTS();
-    speak("What is this?");
+    speak("Is this a dog?");
 
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 500),
@@ -53,7 +52,7 @@ class _Language2State extends State<Language2>
       setState(() {
         message = "Correct! 🎉 Well done!";
       });
-      speak("Correct! Well done! This is a Flower");
+      speak("Correct! Well done! Yes it is an elephant");
       _animationController
           .forward()
           .then((_) => _animationController.reverse());
@@ -83,7 +82,7 @@ class _Language2State extends State<Language2>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "Level 2",
+                      "Level 4",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -137,7 +136,7 @@ class _Language2State extends State<Language2>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text(
-                      "What is this?",
+                      "Is this a dog?",
                       style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -147,7 +146,7 @@ class _Language2State extends State<Language2>
                     ScaleTransition(
                       scale: _animationController
                           .drive(Tween(begin: 1.0, end: 1.2)),
-                      child: Image.asset("assets/images/folower.png",
+                      child: Image.asset("assets/images/elephant.png",
                           width: 200, height: 200),
                     ),
                     const SizedBox(height: 20),
@@ -156,25 +155,27 @@ class _Language2State extends State<Language2>
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            handleResponse(true);
+                            handleResponse(false);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                           ),
-                          child: const Text("Correct",
+                          child: const Text("Yes",
                               style:
                                   TextStyle(fontSize: 24, color: Colors.white)),
                         ),
                         ElevatedButton(
-                          onPressed: () => handleResponse(false),
+                          onPressed: () {
+                            handleResponse(true);
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                           ),
-                          child: const Text("Incorrect",
+                          child: const Text("No",
                               style:
                                   TextStyle(fontSize: 24, color: Colors.white)),
                         ),
@@ -208,7 +209,7 @@ class _Language2State extends State<Language2>
               ),
               GestureDetector(
                 onTap: () {
-                  CustomNavigation2.nextPage2(context, const Language3());
+                  CustomNavigation2.nextPage2(context, const Language4());
                 },
                 child: const CircleAvatar(
                   child: Icon(Icons.arrow_right_alt_rounded),
