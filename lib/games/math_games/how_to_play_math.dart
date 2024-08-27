@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:littletherapist/games/language_games/language1.dart';
-import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
-class HowToPlayLanguageGames extends StatelessWidget {
-  const HowToPlayLanguageGames({super.key});
+class HowToPlayMathGames extends StatelessWidget {
+  const HowToPlayMathGames({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class HowToPlayLanguageGames extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Learn to Play!',
+                'Getting Started with Math Games',
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -32,55 +30,49 @@ class HowToPlayLanguageGames extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const Text(
-                '1. Listen to the word spoken aloud.',
+                'Objective:',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const Text(
+                'Solve math problems to earn points and unlock new levels. Each level presents more challenging problems!',
                 style: TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 10),
               const Text(
-                '2. Look at the options on the screen.',
+                'Steps to Play:',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                '1. Choose the correct answer of the problem and drag and drop it.',
                 style: TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 10),
               const Text(
-                '3. Select the picture that matches the word you heard.',
+                '2. Automatically go to the next level after give corrent answer and times up.',
                 style: TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 10),
               const Text(
-                '4. Click the "Check" button to see if you are correct.',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 20),
-              const SizedBox(height: 20),
-              const Text(
-                'Tips:',
+                'Tips for Success:',
                 style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.deepOrange),
               ),
-              const SizedBox(height: 10),
               const Text(
-                '• Take your time to listen carefully.',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                '• Try to associate the word with the picture to remember better.',
+                '• Practice regularly to improve your math skills.',
                 style: TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 30),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
-                    CustomNavigation.nextPage(context,
-                        const Language1()); // Go back to the previous screen
-                  },
+                  onPressed: () => Navigator.pop(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30, vertical: 15),
-                  ),
+                  ), // Navigation action to the actual game or back to main menu
                   child: const Text('Start Playing',
                       style: TextStyle(fontSize: 20, color: Colors.white)),
                 ),
