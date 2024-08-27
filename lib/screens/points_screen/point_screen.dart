@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:littletherapist/providers/auth_provider.dart';
+import 'package:logger/logger.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server/gmail.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -21,10 +24,88 @@ class _PointScreenState extends State<PointScreen> {
     }
   }
 
+  void sendStyledEmail(BuildContext context) async {
+    final userModel =
+        Provider.of<AuthProvider>(context, listen: false).userModel!;
+    final smtpServer = gmail('gametomato2@gmail.com',
+        'lklo suqi exxm salf'); // Replace with your actual email and password
+
+    // URL of the logo
+    const String logoUrl =
+        'https://drive.google.com/drive/u/0/folders/15jHWhN3Vd8JFhJN9K5fRxoNAQEAQtrNU'; // Replace with your actual image URL
+
+    final String htmlContent = '''
+<html>
+  <head>
+    <style>
+      body { 
+        font-family: Arial, sans-serif;
+        background-image: url('https://img.freepik.com/free-vector/futuristic-technological-wallpaper_79603-1093.jpg?semt=ais_hybrid'); /* Add your background image URL here */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+      .header { 
+        background: #f3f3f3; 
+        padding: 20px; 
+        text-align: center; 
+      }
+      .content { 
+        margin: 20px; 
+        text-align: left; 
+        font-size: 16px; 
+        background-color: rgba(255, 255, 255, 0.8); /* Slight white background for readability */
+        border-radius: 10px;
+        padding: 20px;
+      }
+      .footer { 
+        padding: 20px; 
+        text-align: center; 
+        color: #aaa; 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="$logoUrl" alt="Logo" width="100" height="50">
+      <h1>Your Points Summary</h1>
+    </div>
+    <div class="content">
+      <p>Here are your game points:</p>
+      <ul>
+        <li>Puzzle Games: ${userModel.puzzleScore}</li>
+        <li>Outline Games: ${userModel.outliningScore}</li>
+        <li>Language Games: ${userModel.languageScore}</li>
+        <li>Math Games: ${userModel.mathScore}</li>
+      </ul>
+    </div>
+    <div class="footer">
+      <p>Thank you for using Little Therapist!</p>
+    </div>
+  </body>
+</html>
+
+''';
+
+    final message = Message()
+      ..from = const Address('gametomato2@gmail.com', 'Little Theraphist')
+      ..recipients.add(userModel.email) // Recipient's email
+      ..subject = 'Your Points Summary'
+      ..html = htmlContent;
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      Logger().e('Message sent: $sendReport');
+    } catch (e) {
+      Logger().e('Message not sent.');
+      Logger().e(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final userModel = Provider.of<AuthProvider>(context).userModel!;
-
+    final size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -203,7 +284,25 @@ class _PointScreenState extends State<PointScreen> {
                       }),
                 ],
               ),
-            )
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            FilledButton(
+                style: ButtonStyle(
+                    backgroundColor: const WidgetStatePropertyAll(Colors.blue),
+                    minimumSize:
+                        WidgetStatePropertyAll(Size(size.width * 0.7, 50))),
+                onPressed: () {
+                  sendStyledEmail(context);
+                },
+                child: const Text(
+                  "Send My Points Via Email",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ))
           ],
         ),
       ),

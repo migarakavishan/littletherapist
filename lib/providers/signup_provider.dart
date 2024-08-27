@@ -16,7 +16,7 @@ class SignupProvider extends ChangeNotifier {
       _confirmPasswordController;
   TextEditingController get nameController => _nameController;
 
-  Future<void> startSignUp() async {
+  Future<void> startSignUp(BuildContext context) async {
     if (_emailController.text.trim().isEmpty ||
         _passwordController.text.trim().isEmpty ||
         _passwordController.text != _confirmPasswordController.text ||
@@ -27,7 +27,7 @@ class SignupProvider extends ChangeNotifier {
           .createAccount(
               email: emailController.text,
               password: passwordController.text,
-              name: _nameController.text)
+              name: _nameController.text, context: context)
           .then((value) {
         if (value) {
           clearTextField();

@@ -49,6 +49,7 @@ dependencies:
   cool_alert: ^2.0.1
   percent_indicator: ^4.2.3
   flutter_tts: ^4.0.2
+  mailer: ^6.1.2
 
 dev_dependencies:
   flutter_test:

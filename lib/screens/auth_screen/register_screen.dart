@@ -105,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 minimumSize: WidgetStatePropertyAll(
                                     Size(size.width * 1, 50))),
                             onPressed: () {
-                              value.startSignUp();
+                              value.startSignUp(context);
                             },
                             child: const Text(
                               "Sign Up",
