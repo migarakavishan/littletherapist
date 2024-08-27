@@ -1,4 +1,5 @@
 import 'package:littletherapist/games/drawing_pad/drawing_pad.dart';
+import 'package:littletherapist/games/language_games/how_to_play_language.dart';
 import 'package:littletherapist/games/language_games/language1.dart';
 import 'package:littletherapist/games/language_games/language2.dart';
 import 'package:littletherapist/games/language_games/language3.dart';
@@ -85,6 +86,8 @@ class DemoData {
   ];
 
   static List<LanguageGamesModel> learnwordsmodel = [
+    LanguageGamesModel(
+        id: 0, name: "How to Play", widget: const HowToPlayLanguageGames()),
     LanguageGamesModel(id: 1, name: "Level 1", widget: const Language1()),
     LanguageGamesModel(id: 2, name: "Level 2", widget: const Language2()),
     LanguageGamesModel(id: 3, name: "Level 3", widget: const Language3()),
