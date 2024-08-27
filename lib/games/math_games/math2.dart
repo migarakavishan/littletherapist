@@ -49,7 +49,7 @@ class _Math2State extends State<Math2> {
 
   void completeMath() {
     if (_start > 0) {
-      Provider.of<MathScoreProvider>(context, listen: false).addScore(10);
+      Provider.of<MathScoreProvider>(context, listen: false).addScore(20);
       navigateToNextOutline();
     }
     _timer.cancel();

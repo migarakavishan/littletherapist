@@ -47,7 +47,7 @@ class _Math3State extends State<Math3> {
 
   void completeMath() {
     if (_start > 0) {
-      Provider.of<MathScoreProvider>(context, listen: false).addScore(10);
+      Provider.of<MathScoreProvider>(context, listen: false).addScore(20);
       navigateToNextOutline();
     }
     _timer.cancel();

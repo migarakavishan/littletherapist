@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:littletherapist/providers/auth_provider.dart';
 import 'package:littletherapist/providers/language_score_provider.dart';
+import 'package:littletherapist/screens/home_page/home_page.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 class Language5 extends StatefulWidget {
@@ -62,6 +67,46 @@ class _Language5State extends State<Language5>
       });
       speak("Incorrect, try again.");
     }
+  }
+
+  void showCompletionDialog() {
+    final score =
+        Provider.of<LanguageScoreProvider>(context, listen: false).score;
+    CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        text: "You've completed all puzzles!\nYour final score is: $score",
+        confirmBtnText: 'Home',
+        confirmBtnColor: Colors.green,
+        onConfirmBtnTap: () {
+          Navigator.of(context).pop(); // Close the alert
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            saveScore(score);
+            navigateHome(); // Ensure this is called after the alert is closed
+          }); // Navigate home or to any other screen
+        });
+  }
+
+  void saveScore(int score) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    if (authProvider.user == null) {
+      Logger().e('Error: No user signed in!');
+      return;
+    }
+
+    final userId = authProvider
+        .user?.uid; // Get user ID from the authenticated Firebase user
+    FirebaseFirestore.instance.collection('Users').doc(userId).update({
+      'score.languageScore': score,
+    }).then((_) {
+      Logger().e('Score updated successfully!');
+    }).catchError((error) {
+      Logger().e('Failed to update score: $error');
+    });
+  }
+
+  void navigateHome() {
+    CustomNavigation.nextPage(context, const HomePage());
   }
 
   @override
@@ -209,7 +254,7 @@ class _Language5State extends State<Language5>
               ),
               GestureDetector(
                 onTap: () {
-                  CustomNavigation2.nextPage2(context, const Language5());
+                  showCompletionDialog();
                 },
                 child: const CircleAvatar(
                   child: Icon(Icons.arrow_right_alt_rounded),

@@ -292,7 +292,6 @@ class _Puzzle5State extends State<Puzzle5> {
                 child: Icon(Icons.arrow_right_alt_rounded),
               ),
             )
-            // Removed the GestureDetector that was navigating to the same page
           ],
         ),
       ),

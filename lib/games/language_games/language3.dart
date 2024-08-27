@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:littletherapist/games/language_games/language4.dart';
 import 'package:littletherapist/providers/language_score_provider.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 import 'package:provider/provider.dart';
@@ -207,7 +208,7 @@ class _Language3State extends State<Language3>
               ),
               GestureDetector(
                 onTap: () {
-                  CustomNavigation2.nextPage2(context, const Language3());
+                  CustomNavigation2.nextPage2(context, const Language4());
                 },
                 child: const CircleAvatar(
                   child: Icon(Icons.arrow_right_alt_rounded),
