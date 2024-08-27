@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               minimumSize: WidgetStatePropertyAll(
                                   Size(size.width * 1, 50))),
                           onPressed: () {
-                            value.startSignUp();
+                            value.startSignIn(context);
                           },
                           child: const Text(
                             "Login",

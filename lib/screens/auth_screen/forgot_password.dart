@@ -65,7 +65,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         minimumSize:
                             WidgetStatePropertyAll(Size(size.width * 1, 50))),
                     onPressed: () {
-                      value.sendResetEmail();
+                      value.sendResetEmail(context);
                     },
                     child: const Text(
                       "Send Reset Email",

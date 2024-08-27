@@ -1,18 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:littletherapist/games/language_games/language3.dart';
+import 'package:littletherapist/providers/auth_provider.dart';
 import 'package:littletherapist/providers/language_score_provider.dart';
+import 'package:littletherapist/screens/home_page/home_page.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
-class Language2 extends StatefulWidget {
-  const Language2({super.key});
+class Language5 extends StatefulWidget {
+  const Language5({super.key});
 
   @override
-  State<Language2> createState() => _Language2State();
+  State<Language5> createState() => _Language5State();
 }
 
-class _Language2State extends State<Language2>
+class _Language5State extends State<Language5>
     with SingleTickerProviderStateMixin {
   final FlutterTts flutterTts = FlutterTts();
   late AnimationController _animationController;
@@ -24,7 +28,7 @@ class _Language2State extends State<Language2>
   void initState() {
     super.initState();
     initTTS();
-    speak("What is this?");
+    speak("Is this a boy?");
 
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 500),
@@ -53,7 +57,7 @@ class _Language2State extends State<Language2>
       setState(() {
         message = "Correct! 🎉 Well done!";
       });
-      speak("Correct! Well done! This is a Flower");
+      speak("Correct! Well done! Yes This is a boy.");
       _animationController
           .forward()
           .then((_) => _animationController.reverse());
@@ -63,6 +67,46 @@ class _Language2State extends State<Language2>
       });
       speak("Incorrect, try again.");
     }
+  }
+
+  void showCompletionDialog() {
+    final score =
+        Provider.of<LanguageScoreProvider>(context, listen: false).score;
+    CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        text: "You've completed all puzzles!\nYour final score is: $score",
+        confirmBtnText: 'Home',
+        confirmBtnColor: Colors.green,
+        onConfirmBtnTap: () {
+          Navigator.of(context).pop(); // Close the alert
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            saveScore(score);
+            navigateHome(); // Ensure this is called after the alert is closed
+          }); // Navigate home or to any other screen
+        });
+  }
+
+  void saveScore(int score) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    if (authProvider.user == null) {
+      Logger().e('Error: No user signed in!');
+      return;
+    }
+
+    final userId = authProvider
+        .user?.uid; // Get user ID from the authenticated Firebase user
+    FirebaseFirestore.instance.collection('Users').doc(userId).update({
+      'score.languageScore': score,
+    }).then((_) {
+      Logger().e('Score updated successfully!');
+    }).catchError((error) {
+      Logger().e('Failed to update score: $error');
+    });
+  }
+
+  void navigateHome() {
+    CustomNavigation.nextPage(context, const HomePage());
   }
 
   @override
@@ -83,7 +127,7 @@ class _Language2State extends State<Language2>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "Level 2",
+                      "Level 5",
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -137,7 +181,7 @@ class _Language2State extends State<Language2>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text(
-                      "What is this?",
+                      "Is this a boy?",
                       style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -147,8 +191,8 @@ class _Language2State extends State<Language2>
                     ScaleTransition(
                       scale: _animationController
                           .drive(Tween(begin: 1.0, end: 1.2)),
-                      child: Image.asset("assets/images/folower.png",
-                          width: 200, height: 200),
+                      child: Image.asset("assets/images/boy.png",
+                          width: 300, height: 200),
                     ),
                     const SizedBox(height: 20),
                     Row(
@@ -163,18 +207,20 @@ class _Language2State extends State<Language2>
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                           ),
-                          child: const Text("Correct",
+                          child: const Text("Yes",
                               style:
                                   TextStyle(fontSize: 24, color: Colors.white)),
                         ),
                         ElevatedButton(
-                          onPressed: () => handleResponse(false),
+                          onPressed: () {
+                            handleResponse(false);
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 15),
                           ),
-                          child: const Text("Incorrect",
+                          child: const Text("No",
                               style:
                                   TextStyle(fontSize: 24, color: Colors.white)),
                         ),
@@ -184,7 +230,7 @@ class _Language2State extends State<Language2>
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ElevatedButton(
-                            onPressed: () => speak("What is this?"),
+                            onPressed: () => speak("Is this a boy?"),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
                               padding: const EdgeInsets.symmetric(
@@ -208,7 +254,7 @@ class _Language2State extends State<Language2>
               ),
               GestureDetector(
                 onTap: () {
-                  CustomNavigation2.nextPage2(context, const Language3());
+                  showCompletionDialog();
                 },
                 child: const CircleAvatar(
                   child: Icon(Icons.arrow_right_alt_rounded),

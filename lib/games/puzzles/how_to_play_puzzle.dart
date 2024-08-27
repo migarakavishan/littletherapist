@@ -14,7 +14,7 @@ class HowToPlayPuzzle extends StatelessWidget {
         title: const Text(
           "How to Play",
           style: TextStyle(
-              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+              fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(

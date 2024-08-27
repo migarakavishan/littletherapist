@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:littletherapist/models/user_model.dart';
 import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
 import 'package:littletherapist/screens/auth_screen/login_screen.dart';
@@ -42,7 +43,8 @@ class AuthController {
   Future<bool> createAccount(
       {required String email,
       required String password,
-      required String name}) async {
+      required String name,
+      required BuildContext context}) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -61,8 +63,59 @@ class AuthController {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         Logger().e('The password provided is too weak.');
+        if (context.mounted) {
+          showCupertinoDialog(
+            context: context,
+            builder: (context) {
+              return CupertinoAlertDialog(
+                title: const Column(
+                  children: [
+                    Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
+                    Text("Oops...")
+                  ],
+                ),
+                content: const Text("The password provided is too weak."),
+                actions: <Widget>[
+                  CupertinoDialogAction(
+                    child: const Text('OK'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       } else if (e.code == 'email-already-in-use') {
         Logger().e('The account already exists for that email.');
+        if (context.mounted) {
+          showCupertinoDialog(
+            context: context,
+            builder: (context) {
+              return CupertinoAlertDialog(
+                title: const Column(
+                  children: [
+                    Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
+                    Text("Oops...")
+                  ],
+                ),
+                content:
+                    const Text("The account already exists for that email."),
+                actions: <Widget>[
+                  CupertinoDialogAction(
+                    child: const Text('OK'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       }
       return false;
     } catch (e) {
@@ -75,24 +128,59 @@ class AuthController {
     await FirebaseAuth.instance.signOut();
   }
 
-  Future<bool> signInWithPassword(
-      {required String email, required String password}) async {
+  Future<bool> signInWithPassword({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       return true;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        Logger().e('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        Logger().e('Wrong password provided for that user.');
+      String errorMessage;
+      if (e.code == 'user-not-found' || e.code == 'auth/user-not-found') {
+        errorMessage = 'No user found for that email.';
+      } else if (e.code == 'wrong-password' ||
+          e.code == 'auth/wrong-password') {
+        errorMessage = 'Wrong password provided. Please try again.';
+      } else {
+        errorMessage = 'Login failed: ${e.message}';
       }
+
+      // Log error and show dialog
+      Logger().e(errorMessage);
+      if (context.mounted) {
+        showCupertinoDialog(
+          context: context,
+          builder: (BuildContext context) => CupertinoAlertDialog(
+            title: const Column(
+              children: [
+                Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
+                Text("Login Error"),
+              ],
+            ),
+            content: Text(errorMessage),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                child: const Text('OK'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+      }
+
       return false;
     }
   }
 
   Future<void> sendpasswordResetEmail(String email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    
   }
 
   Future<void> addUserData(UserModel user) async {
@@ -143,16 +231,16 @@ class AuthController {
     }
   }
 
-
   void fetchAndListenUserData(BuildContext context, String userId) {
-  users.doc(userId).snapshots().listen((snapshot) {
-    if (snapshot.exists) {
-      UserModel updatedUser = UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
-      Provider.of<auth_provider.AuthProvider>(context, listen: false).setUserModel(updatedUser);
-    } else {
-      Logger().e("No user data found!");
-    }
-  }, onError: (error) => Logger().e("Error listening to user data: $error"));
-}
-
+    users.doc(userId).snapshots().listen((snapshot) {
+      if (snapshot.exists) {
+        UserModel updatedUser =
+            UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
+        Provider.of<auth_provider.AuthProvider>(context, listen: false)
+            .setUserModel(updatedUser);
+      } else {
+        Logger().e("No user data found!");
+      }
+    }, onError: (error) => Logger().e("Error listening to user data: $error"));
+  }
 }
