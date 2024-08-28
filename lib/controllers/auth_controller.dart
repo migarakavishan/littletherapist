@@ -138,12 +138,14 @@ class AuthController {
           .signInWithEmailAndPassword(email: email, password: password);
       return true;
     } on FirebaseAuthException catch (e) {
+      Logger().f(e.code);
       String errorMessage;
       if (e.code == 'user-not-found' || e.code == 'auth/user-not-found') {
         errorMessage = 'No user found for that email.';
-      } else if (e.code == 'wrong-password' ||
+      } else if (e.code == 'invalid-credential' ||
           e.code == 'auth/wrong-password') {
-        errorMessage = 'Wrong password provided. Please try again.';
+        // errorMessage = 'Wrong password provided. Please try again.';
+        errorMessage = 'Invalid credentials. Please check your email or password.';
       } else {
         errorMessage = 'Login failed: ${e.message}';
       }
@@ -180,7 +182,6 @@ class AuthController {
 
   Future<void> sendpasswordResetEmail(String email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-    
   }
 
   Future<void> addUserData(UserModel user) async {
