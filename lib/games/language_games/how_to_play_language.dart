@@ -47,7 +47,7 @@ class HowToPlayLanguageGames extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
-                '4. Click the "Check" button to see if you are correct.',
+                '4. Click the "Correct" button to see if you are correct.',
                 style: TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 20),
