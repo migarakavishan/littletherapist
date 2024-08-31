@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
+import 'package:littletherapist/providers/auth_provider.dart';
+import 'package:littletherapist/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -8,6 +12,17 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final profileProvider =
+          Provider.of<ProfileProvider>(context, listen: false);
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      profileProvider.loadUserData(authProvider);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -24,86 +39,94 @@ class _EditProfileState extends State<EditProfile> {
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Center(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: Stack(children: [
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWomPds9w5emH_C6RY8xF7KRCJe6I5zwVsuw&s"),
-                            fit: BoxFit.cover,
-                          ),
-                          shape: BoxShape.circle,
-                          color: Colors.grey),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: InkWell(
-                        onTap: () {},
-                        child: CircleAvatar(
-                          radius: 15,
-                          backgroundColor: Colors.black.withOpacity(0.5),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                            size: 15,
+        body: Consumer2<auth_provider.AuthProvider, ProfileProvider>(
+            builder: (context, auth, profile, child) {
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Center(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Stack(children: [
+                      Container(
+                        width: 100,
+                        height: 100,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWomPds9w5emH_C6RY8xF7KRCJe6I5zwVsuw&s"),
+                              fit: BoxFit.cover,
+                            ),
+                            shape: BoxShape.circle,
+                            color: Colors.grey),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: InkWell(
+                          onTap: () {},
+                          child: CircleAvatar(
+                            radius: 15,
+                            backgroundColor: Colors.black.withOpacity(0.5),
+                            child: const Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                              size: 15,
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ]),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      hintText: "Username",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      hintText: "Email",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                FilledButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            const WidgetStatePropertyAll(Colors.blue),
-                        minimumSize:
-                            WidgetStatePropertyAll(Size(size.width * 1, 50))),
-                    onPressed: () {},
-                    child: const Text(
-                      "Save Changes",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ))
-              ],
+                      )
+                    ]),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                    controller: profile.nameController,
+                    decoration: InputDecoration(
+                        hintText: "Username",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20))),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                    enabled: false,
+                    decoration: InputDecoration(
+                        hintText:
+                            "${Provider.of<auth_provider.AuthProvider>(context).user!.email}",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20))),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  FilledButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              const WidgetStatePropertyAll(Colors.blue),
+                          minimumSize:
+                              WidgetStatePropertyAll(Size(size.width * 1, 50))),
+                      onPressed: () async {
+                        await profile.updateUserData(context);
+                      },
+                      child: const Text(
+                        "Save Changes",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ))
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

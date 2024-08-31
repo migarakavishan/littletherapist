@@ -15,8 +15,8 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setUserModel(UserModel model) {
-    _userModel = model;
+  void setUserModel(UserModel usermodel) {
+    _userModel = usermodel;
     notifyListeners();
   }
 

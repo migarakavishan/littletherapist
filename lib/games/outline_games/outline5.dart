@@ -381,7 +381,7 @@ class _Outline5State extends State<Outline5> {
                   ],
                 )),
             const SizedBox(
-              height: 30,
+              height: 10,
             ),
             GestureDetector(
               onTap: () {
