@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:littletherapist/models/user_model.dart';
+import 'package:littletherapist/providers/profile_provider.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 class AuthProvider extends ChangeNotifier {
   User? _user;
@@ -12,21 +14,24 @@ class AuthProvider extends ChangeNotifier {
 
   void setUser(User user) {
     _user = user;
+
+    
     notifyListeners();
   }
 
-  void setUserModel(UserModel usermodel) {
+  void setUserModel(UserModel usermodel, BuildContext context, String name) {
     _userModel = usermodel;
+    Provider.of<ProfileProvider>(context, listen: false).setUserName(name);
     notifyListeners();
   }
 
-  void fetchAndListenUserData(String uid) {
+  void fetchAndListenUserData(String uid, BuildContext context) {
     FirebaseFirestore.instance.collection('Users').doc(uid).snapshots().listen(
         (snapshot) {
       if (snapshot.exists) {
         UserModel updatedUser =
             UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
-        setUserModel(updatedUser);
+        setUserModel(updatedUser, context, updatedUser.name);
       }
     }, onError: (error) => Logger().e("Failed to listen to user data: $error"));
   }

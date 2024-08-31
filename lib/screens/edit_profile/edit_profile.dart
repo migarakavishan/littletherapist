@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:littletherapist/controllers/auth_controller.dart';
 import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
 import 'package:littletherapist/providers/auth_provider.dart';
 import 'package:littletherapist/providers/profile_provider.dart';
@@ -114,6 +115,10 @@ class _EditProfileState extends State<EditProfile> {
                               WidgetStatePropertyAll(Size(size.width * 1, 50))),
                       onPressed: () async {
                         await profile.updateUserData(context);
+
+                        Future.delayed(const Duration(seconds: 1), () {
+                          AuthController().listenAuthState(context);
+                        });
                       },
                       child: const Text(
                         "Save Changes",

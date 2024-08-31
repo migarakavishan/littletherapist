@@ -11,6 +11,7 @@ class ProfileProvider extends ChangeNotifier {
 
   void setUserName(String name) {
     _nameController.text = name;
+    
     notifyListeners();
   }
 
@@ -21,6 +22,7 @@ class ProfileProvider extends ChangeNotifier {
         "name": _nameController.text,
       };
       authController.updateUser(data, auth.user!.uid, context);
+      
     } else {
       Logger().e("Please enter your name");
     }

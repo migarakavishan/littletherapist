@@ -24,15 +24,16 @@ class AuthController {
         fetchUserData(user.uid).then((value) {
           if (value != null) {
             Provider.of<auth_provider.AuthProvider>(context, listen: false)
-                .setUserModel(value);
+                .setUserModel(value, context, value.name);
             CustomNavigation.nextPage(context, const HomePage());
           } else {
+            UserModel newUserModel = UserModel(
+                name: "",
+                image: "https://i.sstatic.net/l60Hf.png",
+                email: user.uid,
+                uid: user.uid);
             Provider.of<auth_provider.AuthProvider>(context, listen: false)
-                .setUserModel(UserModel(
-                    name: "",
-                    image: "https://i.sstatic.net/l60Hf.png",
-                    email: user.uid,
-                    uid: user.uid));
+                .setUserModel(newUserModel, context, newUserModel.name);
             CustomNavigation.nextPage(context, const HomePage());
           }
         });
@@ -224,7 +225,7 @@ class AuthController {
       fetchUserData(uid).then((updatedUser) {
         if (updatedUser != null) {
           Provider.of<auth_provider.AuthProvider>(context, listen: false)
-              .setUserModel(updatedUser);
+              .setUserModel(updatedUser, context, updatedUser.name);
         }
       });
     } catch (e) {
@@ -239,7 +240,7 @@ class AuthController {
         UserModel updatedUser =
             UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
         Provider.of<auth_provider.AuthProvider>(context, listen: false)
-            .setUserModel(updatedUser);
+            .setUserModel(updatedUser, context, updatedUser.name);
       } else {
         Logger().e("No user data found!");
       }
