@@ -489,7 +489,7 @@ class _Math1State extends State<Math1> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               GestureDetector(
                 onTap: () {

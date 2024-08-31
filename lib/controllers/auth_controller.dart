@@ -24,15 +24,16 @@ class AuthController {
         fetchUserData(user.uid).then((value) {
           if (value != null) {
             Provider.of<auth_provider.AuthProvider>(context, listen: false)
-                .setUserModel(value);
+                .setUserModel(value, context, value.name);
             CustomNavigation.nextPage(context, const HomePage());
           } else {
+            UserModel newUserModel = UserModel(
+                name: "",
+                image: "https://i.sstatic.net/l60Hf.png",
+                email: user.uid,
+                uid: user.uid);
             Provider.of<auth_provider.AuthProvider>(context, listen: false)
-                .setUserModel(UserModel(
-                    name: "",
-                    image: "https://i.sstatic.net/l60Hf.png",
-                    email: user.uid,
-                    uid: user.uid));
+                .setUserModel(newUserModel, context, newUserModel.name);
             CustomNavigation.nextPage(context, const HomePage());
           }
         });
@@ -145,7 +146,8 @@ class AuthController {
       } else if (e.code == 'invalid-credential' ||
           e.code == 'auth/wrong-password') {
         // errorMessage = 'Wrong password provided. Please try again.';
-        errorMessage = 'Invalid credentials. Please check your email or password.';
+        errorMessage =
+            'Invalid credentials. Please check your email or password.';
       } else {
         errorMessage = 'Login failed: ${e.message}';
       }
@@ -223,7 +225,7 @@ class AuthController {
       fetchUserData(uid).then((updatedUser) {
         if (updatedUser != null) {
           Provider.of<auth_provider.AuthProvider>(context, listen: false)
-              .setUserModel(updatedUser);
+              .setUserModel(updatedUser, context, updatedUser.name);
         }
       });
     } catch (e) {
@@ -238,10 +240,45 @@ class AuthController {
         UserModel updatedUser =
             UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
         Provider.of<auth_provider.AuthProvider>(context, listen: false)
-            .setUserModel(updatedUser);
+            .setUserModel(updatedUser, context, updatedUser.name);
       } else {
         Logger().e("No user data found!");
       }
     }, onError: (error) => Logger().e("Error listening to user data: $error"));
+  }
+
+  Future<void> updateUser(
+      Map<String, dynamic> data, String uid, BuildContext context) async {
+    try {
+      await users.doc(uid).update(data);
+      Logger().f("User Updated");
+      if (context.mounted) {
+        showCupertinoDialog(
+          context: context,
+          builder: (context) {
+            return CupertinoAlertDialog(
+              title: const Column(
+                children: [
+                  Icon(
+                    Icons.error,
+                    color: Colors.red,
+                  ),
+                  Text("Save Changes")
+                ],
+              ),
+              content: const Text("Username change successfull."),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                  child: const Text('OK'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
+      Logger().e(e);
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:littletherapist/controllers/auth_controller.dart';
 import 'package:littletherapist/providers/auth_provider.dart' as auth_provider;
+import 'package:littletherapist/screens/Contact%20Us/contact_us.dart';
 import 'package:littletherapist/screens/edit_profile/edit_profile.dart';
 import 'package:littletherapist/screens/points_screen/point_screen.dart';
 import 'package:littletherapist/utils/navigation/custom_navigation.dart';
@@ -74,11 +75,6 @@ class MenuDrawer extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: const Icon(Icons.star_border),
-          title: const Text("Favorite"),
-          onTap: () {},
-        ),
-        ListTile(
           leading: const Icon(Icons.score),
           title: const Text("My Points"),
           onTap: () {
@@ -96,8 +92,10 @@ class MenuDrawer extends StatelessWidget {
         ),
         ListTile(
           leading: const Icon(Icons.person),
-          title: const Text("About us"),
-          onTap: () {},
+          title: const Text("Contact us"),
+          onTap: () {
+            CustomNavigation.nextPage(context, const ContactUsPage());
+          },
         ),
         const Divider(),
         ListTile(

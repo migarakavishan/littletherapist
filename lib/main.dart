@@ -5,6 +5,7 @@ import 'package:littletherapist/providers/auth_provider.dart';
 import 'package:littletherapist/providers/language_score_provider.dart';
 import 'package:littletherapist/providers/math_score_provide.dart';
 import 'package:littletherapist/providers/outline_score_provider.dart';
+import 'package:littletherapist/providers/profile_provider.dart';
 import 'package:littletherapist/providers/puzzle_score_provider.dart';
 import 'package:littletherapist/providers/signin_provider.dart';
 import 'package:littletherapist/providers/signup_provider.dart';
@@ -26,6 +27,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (context) => OutlineScoreProvider()),
       ChangeNotifierProvider(create: (context) => MathScoreProvider()),
       ChangeNotifierProvider(create: (context) => LanguageScoreProvider()),
+      ChangeNotifierProvider(create: (context) => ProfileProvider()),
     ],
     child: const MyApp(),
   ));
