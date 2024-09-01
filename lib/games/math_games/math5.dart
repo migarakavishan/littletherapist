@@ -54,7 +54,7 @@ class _Math5State extends State<Math5> {
     CoolAlert.show(
         context: context,
         type: CoolAlertType.success,
-        text: "You've completed all puzzles!\nYour final score is: $score",
+        text: "You've completed all Maths!\nYour final score is: $score",
         confirmBtnText: 'Home',
         confirmBtnColor: Colors.green,
         onConfirmBtnTap: () {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:littletherapist/games/math_games/math1.dart';
+import 'package:littletherapist/utils/navigation/custom_navigation.dart';
 
 class HowToPlayMathGames extends StatelessWidget {
   const HowToPlayMathGames({super.key});
@@ -67,7 +69,9 @@ class HowToPlayMathGames extends StatelessWidget {
               const SizedBox(height: 30),
               Center(
                 child: ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    CustomNavigation.nextPage(context, const Math1());
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     padding: const EdgeInsets.symmetric(
