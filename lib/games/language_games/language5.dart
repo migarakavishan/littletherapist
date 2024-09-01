@@ -75,7 +75,8 @@ class _Language5State extends State<Language5>
     CoolAlert.show(
         context: context,
         type: CoolAlertType.success,
-        text: "You've completed all puzzles!\nYour final score is: $score",
+        text:
+            "You've completed all Language games!\nYour final score is: $score",
         confirmBtnText: 'Home',
         confirmBtnColor: Colors.green,
         onConfirmBtnTap: () {

@@ -62,8 +62,8 @@ class SigninProvider extends ChangeNotifier {
               title: const Column(
                 children: [
                   Icon(
-                    Icons.check_circle_rounded,
-                    color: Colors.blue,
+                    Icons.error,
+                    color: Colors.red,
                   ),
                   Text("Oops...")
                 ],
@@ -89,10 +89,10 @@ class SigninProvider extends ChangeNotifier {
               title: const Column(
                 children: [
                   Icon(
-                    Icons.error,
+                    Icons.check_circle,
                     color: Colors.red,
                   ),
-                  Text("Oops...")
+                  Text("Sending...")
                 ],
               ),
               content: const Text("Check your Emails"),
