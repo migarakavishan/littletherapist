@@ -206,7 +206,7 @@ class _Language4State extends State<Language4>
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 25,
               ),
               GestureDetector(
                 onTap: () {
