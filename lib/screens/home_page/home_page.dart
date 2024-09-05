@@ -31,63 +31,62 @@ class _HomePageState extends State<HomePage> {
         ),
         backgroundColor: Colors.white,
         body: Consumer<auth_provider.AuthProvider>(
-          builder: (context, authProvider, child) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    HomeHeader(size: size),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        const Text(
-                          "Hello,",
-                          style: TextStyle(color: Colors.black, fontSize: 25),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          authProvider.userModel!.name,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "Let's start playing!",
-                      style: TextStyle(color: Colors.grey.shade700, fontSize: 15),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    PropularSlider(size: size),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      "Play Games",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    GamesGrid(gamestitle: gamestitle)
-                  ],
-                ),
+            builder: (context, authProvider, child) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HomeHeader(size: size),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        "Hello,",
+                        style: TextStyle(color: Colors.black, fontSize: 25),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        authProvider.userModel!.name,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    "Let's start playing!",
+                    style: TextStyle(color: Colors.grey.shade700, fontSize: 15),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  PopularSlider(size: size),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Play Games",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  GamesGrid(gamestitle: gamestitle)
+                ],
               ),
-            );
-          }
-        ),
+            ),
+          );
+        }),
       ),
     );
   }
